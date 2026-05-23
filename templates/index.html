@@ -5,18 +5,22 @@
 <section class="hero">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-7 fade-in">
-                <h1>Transformamos tu presencia digital</h1>
-                <p class="lead">
+            <div class="col-lg-7">
+                <!-- Logo1 grande antes del título -->
+                <div class="hero-logo fade-in-up">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="SertainsLabs" height="100">
+                </div>
+                <h1 class="fade-in-up delay-1">Transformamos tu presencia digital</h1>
+                <p class="lead fade-in-up delay-2">
                     Desarrollo web profesional para empresas, emprendimientos y tiendas online. 
                     Soluciones a medida que impulsan tu negocio.
                 </p>
-                <a href="/contacto" class="btn btn-primary btn-lg">
+                <a href="/contacto" class="btn btn-primary btn-lg fade-in-up delay-3">
                     <i class="fas fa-rocket"></i> Cotiza tu proyecto
                 </a>
             </div>
-            <div class="col-lg-5 d-none d-lg-block fade-in">
-                <i class="fas fa-laptop-code" style="font-size: 12rem; color: rgba(255,255,255,0.2);"></i>
+            <div class="col-lg-5 d-none d-lg-block fade-in-right">
+                <i class="fas fa-laptop-code" style="font-size: 10rem; color: rgba(255, 165, 0, 0.2);"></i>
             </div>
         </div>
     </div>
@@ -24,12 +28,12 @@
 
 <!-- Servicios Destacados -->
 <section class="container my-5">
-    <div class="text-center mb-5">
+    <div class="text-center mb-5 reveal">
         <h2>Soluciones que impulsan tu negocio</h2>
         <p class="text-muted">Tecnología de vanguardia para resultados extraordinarios</p>
     </div>
     <div class="row g-4">
-        <div class="col-md-4">
+        <div class="col-md-4 reveal delay-1">
             <div class="card h-100">
                 <div class="card-body text-center">
                     <i class="fas fa-globe card-icon"></i>
@@ -40,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 reveal delay-2">
             <div class="card h-100">
                 <div class="card-body text-center">
                     <i class="fas fa-shopping-cart card-icon"></i>
@@ -51,7 +55,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 reveal delay-3">
             <div class="card h-100">
                 <div class="card-body text-center">
                     <i class="fas fa-robot card-icon"></i>
@@ -68,26 +72,26 @@
 <!-- Características -->
 <section class="features-section">
     <div class="container">
-        <div class="text-center mb-5">
+        <div class="text-center mb-5 reveal">
             <h2>¿Por qué elegir SertainsLabs?</h2>
             <p class="text-muted">Excelencia técnica y compromiso con tus resultados</p>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 reveal delay-1">
                 <div class="feature-item">
                     <i class="fas fa-shield-alt feature-icon"></i>
                     <h4>Seguridad garantizada</h4>
                     <p>Estándares de seguridad profesionales y protección de datos.</p>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 reveal delay-2">
                 <div class="feature-item">
                     <i class="fas fa-chart-line feature-icon"></i>
                     <h4>Resultados medibles</h4>
                     <p>Optimización continua para maximizar tu retorno de inversión.</p>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 reveal delay-3">
                 <div class="feature-item">
                     <i class="fas fa-headset feature-icon"></i>
                     <h4>Soporte 24/7</h4>
@@ -99,7 +103,7 @@
 </section>
 
 <!-- CTA Final -->
-<section class="container text-center my-5 py-5">
+<section class="container text-center my-5 py-5 reveal">
     <h2>¿Listo para llevar tu negocio al siguiente nivel?</h2>
     <p class="lead mb-4">Contáctanos hoy y descubre cómo podemos ayudarte</p>
     <a href="/contacto" class="btn btn-primary btn-lg">

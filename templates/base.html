@@ -22,11 +22,11 @@
 </head>
 <body>
 
-    <!-- Navbar -->
+    <!-- Navbar con Logo2 (S + nombre completo) -->
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <i class="fas fa-code"></i> SertainsLabs <span>SpA</span>
+                <img src="{{ url_for('static', filename='img/logo2.png') }}" alt="SertainsLabs SpA" height="40">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -58,8 +58,8 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
                     <p class="mb-0">&copy; 2025 SertainsLabs SpA - Todos los derechos reservados</p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
@@ -73,5 +73,31 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script para animaciones al hacer scroll -->
+    <script>
+        // Intersection Observer para animaciones al hacer scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        revealElements.forEach(el => observer.observe(el));
+        
+        // Animación para elementos con clase fade-in-up al cargar
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right, .scale-in');
+            animatedElements.forEach((el, index) => {
+                if (!el.classList.contains('active')) {
+                    el.style.opacity = '1';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
