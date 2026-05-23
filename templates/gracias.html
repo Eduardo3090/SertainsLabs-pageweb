@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+            <div class="thank-you-section">
+                <i class="fas fa-check-circle thank-you-icon"></i>
+                <h1 class="mb-3">¡Mensaje enviado con éxito!</h1>
+                <p class="lead mb-4">
+                    Gracias por contactarte con <strong>SertainsLabs SpA</strong>.
+                </p>
+                <p class="mb-4">
+                    Hemos recibido tu consulta y te responderemos a la brevedad 
+                    (máximo 24 horas hábiles).
+                </p>
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">¿Qué sigue?</h5>
+                        <p class="card-text mb-0">
+                            Uno de nuestros especialistas revisará tu proyecto y te contactará 
+                            para agendar una reunión de diagnóstico sin costo.
+                        </p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <a href="/" class="btn btn-primary">
+                        <i class="fas fa-home"></i> Volver al inicio
+                    </a>
+                    <a href="/servicios" class="btn btn-outline-primary ms-2">
+                        <i class="fas fa-eye"></i> Ver servicios
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

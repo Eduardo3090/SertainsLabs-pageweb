@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="text-center mb-5">
+                <h1 class="fade-in">Contáctanos</h1>
+                <p class="lead text-muted">
+                    Cuéntanos tu proyecto y te responderemos en menos de 24 horas
+                </p>
+            </div>
+            
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4 p-md-5">
+                    <!-- FormSubmit -->
+                    <form action="https://formsubmit.co/tu-email@empresa.com" method="POST">
+                        <!-- Configuración de FormSubmit -->
+                        <input type="hidden" name="_subject" value="Nuevo contacto desde SertainsLabs">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_next" value="https://tu-dominio.onrender.com/gracias">
+                        
+                        <!-- Protección anti-spam (honeypot) -->
+                        <input type="text" name="_honey" style="display:none">
+                        
+                        <!-- Campo nombre -->
+                        <div class="mb-4">
+                            <label for="nombre" class="form-label">Nombre completo *</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        </div>
+                        
+                        <!-- Campo email -->
+                        <div class="mb-4">
+                            <label for="email" class="form-label">Correo electrónico *</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        
+                        <!-- Campo empresa -->
+                        <div class="mb-4">
+                            <label for="empresa" class="form-label">Empresa / Emprendimiento</label>
+                            <input type="text" class="form-control" id="empresa" name="empresa">
+                        </div>
+                        
+                        <!-- Campo servicio -->
+                        <div class="mb-4">
+                            <label for="servicio" class="form-label">Servicio de interés *</label>
+                            <select class="form-select" id="servicio" name="servicio" required>
+                                <option value="">Selecciona una opción</option>
+                                <option value="web_empresarial">Web Empresarial</option>
+                                <option value="ecommerce">Tienda Online / E-commerce</option>
+                                <option value="automatizacion">Automatización de procesos</option>
+                                <option value="seo">Optimización SEO</option>
+                                <option value="rediseno">Rediseño web</option>
+                                <option value="mantenimiento">Mantenimiento y soporte</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Campo mensaje -->
+                        <div class="mb-4">
+                            <label for="mensaje" class="form-label">Cuéntanos tu proyecto *</label>
+                            <textarea class="form-control" id="mensaje" name="mensaje" rows="5" required></textarea>
+                        </div>
+                        
+                        <!-- Checkbox privacidad -->
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="privacidad" name="privacidad" required>
+                                <label class="form-check-label" for="privacidad">
+                                    He leído y acepto la <a href="#" data-bs-toggle="modal" data-bs-target="#politicaModal">política de privacidad</a> *
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Botón enviar -->
+                        <button type="submit" class="btn btn-primary btn-lg w-100">
+                            <i class="fas fa-paper-plane"></i> Enviar mensaje
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Información adicional -->
+            <div class="row mt-5 text-center">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <i class="fas fa-envelope fa-2x text-primary mb-2"></i>
+                    <h6>Email</h6>
+                    <p class="text-muted small">contacto@sertainslabs.cl</p>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <i class="fas fa-phone fa-2x text-primary mb-2"></i>
+                    <h6>Teléfono</h6>
+                    <p class="text-muted small">+56 2 1234 5678</p>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <i class="fas fa-clock fa-2x text-primary mb-2"></i>
+                    <h6>Horario</h6>
+                    <p class="text-muted small">Lun a Vie: 9:00 - 18:00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Política de Privacidad -->
+<div class="modal fade" id="politicaModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Política de Privacidad</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>En SertainsLabs SpA, tus datos serán utilizados exclusivamente para:</p>
+                <ul>
+                    <li>Responder a tu consulta o solicitud</li>
+                    <li>Enviarte información relevante sobre nuestros servicios</li>
+                    <li>Mejorar nuestra atención al cliente</li>
+                </ul>
+                <p>No compartiremos tus datos con terceros sin tu consentimiento explícito.</p>
+                <p class="mb-0"><small>Última actualización: Enero 2025</small></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
