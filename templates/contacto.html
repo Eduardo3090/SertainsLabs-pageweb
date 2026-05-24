@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container my-4 my-md-5">
+<div class="container my-4">
     <div class="row">
-        <div class="col-lg-8 mx-auto">
+        <div class="col-lg-7 mx-auto">
             <div class="text-center mb-4 reveal">
                 <h1 class="fade-in-up">Contáctanos</h1>
-                <p class="lead text-muted">
+                <p class="text-muted small">
                     Cuéntanos tu proyecto y te responderemos en menos de 24 horas
                 </p>
             </div>
             
-            <div class="card shadow-sm border-0 contact-form-wrapper">
-                <div class="card-body p-4 p-md-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
                     <!-- FormSubmit -->
                     <form action="https://formsubmit.co/tu-email@empresa.com" method="POST">
                         <!-- Configuración de FormSubmit -->
@@ -27,26 +27,26 @@
                         <div class="row g-3">
                             <!-- Campo nombre -->
                             <div class="col-md-6">
-                                <label for="nombre" class="form-label">Nombre completo *</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                <label for="nombre" class="form-label small fw-bold">Nombre completo *</label>
+                                <input type="text" class="form-control form-control-sm" id="nombre" name="nombre" required>
                             </div>
                             
                             <!-- Campo email -->
                             <div class="col-md-6">
-                                <label for="email" class="form-label">Correo electrónico *</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
+                                <label for="email" class="form-label small fw-bold">Correo electrónico *</label>
+                                <input type="email" class="form-control form-control-sm" id="email" name="email" required>
                             </div>
                             
                             <!-- Campo empresa -->
                             <div class="col-12">
-                                <label for="empresa" class="form-label">Empresa / Emprendimiento</label>
-                                <input type="text" class="form-control" id="empresa" name="empresa">
+                                <label for="empresa" class="form-label small fw-bold">Empresa / Emprendimiento</label>
+                                <input type="text" class="form-control form-control-sm" id="empresa" name="empresa">
                             </div>
                             
                             <!-- Campo servicio -->
                             <div class="col-12">
-                                <label for="servicio" class="form-label">Servicio de interés *</label>
-                                <select class="form-select" id="servicio" name="servicio" required>
+                                <label for="servicio" class="form-label small fw-bold">Servicio de interés *</label>
+                                <select class="form-select form-select-sm" id="servicio" name="servicio" required>
                                     <option value="">Selecciona una opción</option>
                                     <option value="web_empresarial">Web Empresarial</option>
                                     <option value="ecommerce">Tienda Online / E-commerce</option>
@@ -60,16 +60,16 @@
                             
                             <!-- Campo mensaje -->
                             <div class="col-12">
-                                <label for="mensaje" class="form-label">Cuéntanos tu proyecto *</label>
-                                <textarea class="form-control" id="mensaje" name="mensaje" rows="4" required></textarea>
+                                <label for="mensaje" class="form-label small fw-bold">Mensaje *</label>
+                                <textarea class="form-control form-control-sm" id="mensaje" name="mensaje" rows="3" required></textarea>
                             </div>
                             
                             <!-- Checkbox privacidad -->
                             <div class="col-12">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="privacidad" name="privacidad" required>
-                                    <label class="form-check-label" for="privacidad">
-                                        He leído y acepto la <a href="#" data-bs-toggle="modal" data-bs-target="#politicaModal">política de privacidad</a> *
+                                    <label class="form-check-label small" for="privacidad">
+                                        Acepto la <a href="#" data-bs-toggle="modal" data-bs-target="#politicaModal">política de privacidad</a> *
                                     </label>
                                 </div>
                             </div>
@@ -85,19 +85,19 @@
                 </div>
             </div>
             
-            <!-- Información adicional (más compacta) -->
-            <div class="row mt-4 text-center contact-info">
-                <div class="col-md-4 mb-2 mb-md-0">
-                    <i class="fas fa-envelope text-primary"></i>
-                    <small class="text-muted d-block">contacto@sertainslabs.cl</small>
+            <!-- Información adicional compacta -->
+            <div class="row mt-3 text-center">
+                <div class="col-4">
+                    <i class="fas fa-envelope text-primary small"></i>
+                    <p class="small text-muted mb-0">contacto@sertainslabs.cl</p>
                 </div>
-                <div class="col-md-4 mb-2 mb-md-0">
-                    <i class="fas fa-phone text-primary"></i>
-                    <small class="text-muted d-block">+56 2 1234 5678</small>
+                <div class="col-4">
+                    <i class="fas fa-phone text-primary small"></i>
+                    <p class="small text-muted mb-0">+56 2 1234 5678</p>
                 </div>
-                <div class="col-md-4 mb-2 mb-md-0">
-                    <i class="fas fa-clock text-primary"></i>
-                    <small class="text-muted d-block">Lun a Vie: 9:00 - 18:00</small>
+                <div class="col-4">
+                    <i class="fas fa-clock text-primary small"></i>
+                    <p class="small text-muted mb-0">Lun a Vie 9-18</p>
                 </div>
             </div>
         </div>
@@ -106,13 +106,13 @@
 
 <!-- Modal Política de Privacidad -->
 <div class="modal fade" id="politicaModal" tabindex="-1">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Política de Privacidad</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body small">
                 <p>En SertainsLabs SpA, tus datos serán utilizados exclusivamente para:</p>
                 <ul>
                     <li>Responder a tu consulta o solicitud</li>
@@ -123,7 +123,7 @@
                 <p class="mb-0"><small>Última actualización: Enero 2025</small></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Aceptar</button>
             </div>
         </div>
     </div>
