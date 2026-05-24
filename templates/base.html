@@ -19,14 +19,55 @@
     
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <style>
+        /* Solución: logo sin afectar altura de navbar */
+        .navbar {
+            background-color: #E8D5B7;
+            padding: 8px 0;
+            min-height: 60px;
+        }
+        
+        .navbar-brand {
+            position: relative;
+            top: -20px;
+            margin-bottom: -40px;
+        }
+        
+        .navbar-brand img {
+            height: 120px;
+            width: auto;
+            display: block;
+        }
+        
+        /* Ajuste para móviles */
+        @media (max-width: 768px) {
+            .navbar-brand {
+                top: -10px;
+                margin-bottom: -30px;
+            }
+            .navbar-brand img {
+                height: 80px;
+            }
+        }
+        
+        /* Ajuste para que el contenido no quede debajo del logo */
+        body {
+            padding-top: 0;
+        }
+        
+        main {
+            min-height: calc(100vh - 140px);
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Navbar con logo2 mucho más grande -->
-    <nav class="navbar navbar-expand-lg sticky-top" style="background-color: #E8D5B7; padding: 4px 0;">
-        <div class="container">
+    <!-- Navbar con logo flotante -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container position-relative">
             <a class="navbar-brand" href="/">
-                <img src="{{ url_for('static', filename='img/logo2.png') }}" alt="SertainsLabs SpA" style="height: 160px; width: auto;">
+                <img src="{{ url_for('static', filename='img/logo2.png') }}" alt="SertainsLabs SpA">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -50,8 +91,11 @@
         </div>
     </nav>
 
+    <!-- Espaciador para que el contenido no quede tapado por el logo flotante -->
+    <div style="height: 40px;"></div>
+
     <!-- Contenido principal -->
-    <main style="min-height: calc(100vh - 140px);">
+    <main>
         {% block content %}{% endblock %}
     </main>
 
