@@ -1,26 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- Hero Section -->
-<section class="hero">
+<!-- Hero Section - Formato vertical centrado -->
+<section class="hero" style="padding: 60px 0; text-align: center; min-height: 500px; display: flex; align-items: center;">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-7">
-                <!-- Logo1 grande antes del título -->
-                <div class="hero-logo fade-in-up">
-                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="SertainsLabs" height="100">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <!-- Logo1 grande centrado -->
+                <div class="hero-logo fade-in-up" style="margin-bottom: 30px;">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="SertainsLabs" style="max-width: 200px; width: 100%;">
                 </div>
-                <h1 class="fade-in-up delay-1">Transformamos tu presencia digital</h1>
-                <p class="lead fade-in-up delay-2">
+                
+                <!-- Título centrado -->
+                <h1 class="fade-in-up delay-1" style="color: var(--beige-crema); margin-bottom: 20px; font-size: 3rem;">
+                    Transformamos tu presencia digital
+                </h1>
+                
+                <!-- Descripción centrada -->
+                <p class="lead fade-in-up delay-2" style="color: var(--beige-crema); margin-bottom: 35px; font-size: 1.2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
                     Desarrollo web profesional para empresas, emprendimientos y tiendas online. 
                     Soluciones a medida que impulsan tu negocio.
                 </p>
+                
+                <!-- Botón centrado -->
                 <a href="/contacto" class="btn btn-primary btn-lg fade-in-up delay-3">
                     <i class="fas fa-rocket"></i> Cotiza tu proyecto
                 </a>
-            </div>
-            <div class="col-lg-5 d-none d-lg-block fade-in-right">
-                <i class="fas fa-laptop-code" style="font-size: 10rem; color: rgba(255, 165, 0, 0.2);"></i>
             </div>
         </div>
     </div>
