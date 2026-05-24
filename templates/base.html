@@ -22,11 +22,11 @@
 </head>
 <body>
 
-    <!-- Navbar con fondo beige elegante -->
-    <nav class="navbar navbar-expand-lg sticky-top">
+    <!-- Navbar con logo2 mucho más grande -->
+    <nav class="navbar navbar-expand-lg sticky-top" style="background-color: #E8D5B7; padding: 15px 0;">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <img src="{{ url_for('static', filename='img/logo2.png') }}" alt="SertainsLabs SpA">
+                <img src="{{ url_for('static', filename='img/logo2.png') }}" alt="SertainsLabs SpA" style="height: 80px; width: auto;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -34,16 +34,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Inicio</a>
+                        <a class="nav-link" href="/" style="color: #111111 !important; font-weight: 600;">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/servicios">Servicios</a>
+                        <a class="nav-link" href="/servicios" style="color: #111111 !important; font-weight: 600;">Servicios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/equipo">Equipo</a>
+                        <a class="nav-link" href="/equipo" style="color: #111111 !important; font-weight: 600;">Equipo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/contacto">Contacto</a>
+                        <a class="nav-link" href="/contacto" style="color: #111111 !important; font-weight: 600;">Contacto</a>
                     </li>
                 </ul>
             </div>
@@ -51,19 +51,19 @@
     </nav>
 
     <!-- Contenido principal -->
-    <main>
+    <main style="min-height: calc(100vh - 140px);">
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Footer con fondo beige elegante -->
-    <footer>
+    <!-- Footer -->
+    <footer style="background-color: #E8D5B7; color: #111111; padding: 15px 0; margin-top: 40px; border-top: 1px solid rgba(0,0,0,0.05);">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
-                    <p class="mb-0">&copy; 2025 SertainsLabs SpA - Todos los derechos reservados</p>
+                    <p class="mb-0" style="font-size: 0.85rem;">&copy; 2025 SertainsLabs SpA - Todos los derechos reservados</p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <p class="mb-0">
+                    <p class="mb-0" style="font-size: 0.85rem;">
                         <i class="fas fa-shield-alt"></i> Seguridad y confianza para tu negocio digital
                     </p>
                 </div>
@@ -76,9 +76,7 @@
     
     <!-- Script para animaciones al hacer scroll -->
     <script>
-        // Intersection Observer para animaciones al hacer scroll
         const revealElements = document.querySelectorAll('.reveal');
-        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -86,10 +84,8 @@
                 }
             });
         }, { threshold: 0.1 });
-        
         revealElements.forEach(el => observer.observe(el));
         
-        // Animación para elementos con clase fade-in-up al cargar
         document.addEventListener('DOMContentLoaded', function() {
             const animatedElements = document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right, .scale-in');
             animatedElements.forEach((el, index) => {
