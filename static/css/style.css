@@ -521,3 +521,45 @@ footer a:hover {
 main {
     min-height: calc(100vh - 200px);
 }
+
+/* ============================================
+   AJUSTES DEFINITIVOS PARA FORMULARIO Y FOOTER
+   ============================================ */
+
+/* Fuerza a que el main ocupe al menos toda la altura menos el footer */
+main {
+    min-height: calc(100vh - 140px);
+}
+
+/* Contenedor del formulario con márgenes adecuados */
+.contact-wrapper {
+    margin-bottom: 30px;
+}
+
+/* Asegura que el footer no se superponga */
+footer {
+    position: relative;
+    clear: both;
+    margin-top: 40px !important;
+}
+
+/* Tarjeta del formulario con tamaño controlado */
+.contact-form-card {
+    margin-bottom: 20px;
+}
+
+/* Espaciado general para páginas con formulario */
+.contact-page main {
+    min-height: calc(100vh - 140px);
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+    .navbar-brand img {
+        height: 60px !important;
+    }
+    
+    main {
+        min-height: calc(100vh - 120px);
+    }
+}
