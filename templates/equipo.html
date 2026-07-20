@@ -1,50 +1,94 @@
 {% extends "base.html" %}
-
 {% block content %}
-<div class="container my-5">
-    <div class="text-center mb-5 reveal">
-        <h1 class="fade-in-up">Nuestro Equipo</h1>
-        <p class="lead text-muted">Expertos en tecnología comprometidos con tu éxito</p>
+
+<!-- PAGE HERO -->
+<div style="background: var(--ink); padding: 8rem 5vw 5rem; position: relative; overflow: hidden;">
+    <div style="position: relative; z-index: 1;">
+        <p class="eyebrow" style="color: var(--orange-light);">El equipo</p>
+        <h1 style="font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem);
+                   color: #fff; line-height: 1.05; margin-bottom: 1rem;">
+            Dos personas.<br><em style="color: var(--orange-light); font-style: italic;">Un solo objetivo.</em>
+        </h1>
+        <p style="color: rgba(255,255,255,.55); font-size: 1.05rem; max-width: 45ch; line-height: 1.7;">
+            Somos estudiantes que combinamos conocimiento técnico con hambre de resultados. 
+            No prometemos experiencia de décadas — prometemos dedicación total a cada proyecto.
+        </p>
     </div>
-    
-    <div class="row justify-content-center g-4">
-        {% for integrante in integrantes %}
-        <div class="col-md-6 col-lg-5 reveal delay-{{ loop.index }}">
-            <div class="team-card">
-                <div class="team-icon">
-                    <i class="fas fa-user-circle"></i>
+</div>
+
+<!-- EQUIPO -->
+<section style="background: #FFF5EE; padding: 6rem 5vw;">
+    <div style="max-width: 1000px; margin: 0 auto;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem;">
+            {% for integrante in integrantes %}
+            <div class="reveal" style="background: #fff; border-radius: 12px;
+                         border-top: 4px solid var(--orange);
+                         box-shadow: 0 4px 24px rgba(0,0,0,.07);
+                         overflow: hidden; transition: transform .3s, box-shadow .3s;"
+                 onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 36px rgba(0,0,0,.12)'"
+                 onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 24px rgba(0,0,0,.07)'">
+
+                <!-- Foto -->
+                <div style="height: 220px; background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+                            display: flex; align-items: center; justify-content: center; position: relative;">
+                    <i class="fas fa-user" style="font-size: 5rem; color: rgba(242,100,25,.3);"></i>
+                    <span style="position: absolute; bottom: 12px; right: 12px;
+                                 background: var(--orange); color: #fff;
+                                 font-size: .72rem; font-weight: 700; letter-spacing: .1em;
+                                 text-transform: uppercase; padding: .3rem .8rem; border-radius: 3px;">
+                        {{ integrante.cargo }}
+                    </span>
                 </div>
-                <h3 class="card-title">{{ integrante.nombre }}</h3>
-                <h5 class="text-primary mb-3">{{ integrante.cargo }}</h5>
-                <div class="text-start mt-4">
-                    <h6><i class="fas fa-tasks"></i> Responsabilidades:</h6>
-                    <ul class="list-unstyled mt-2">
+
+                <!-- Info -->
+                <div style="padding: 1.8rem;">
+                    <h3 style="font-family: var(--serif); font-size: 1.5rem;
+                               margin-bottom: .8rem; color: var(--ink);">
+                        {{ integrante.nombre }}
+                    </h3>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
                         {% for responsabilidad in integrante.responsabilidades %}
-                        <li class="mb-2">
-                            <i class="fas fa-check-circle text-primary me-2"></i>
+                        <li style="display: flex; align-items: center; gap: .6rem;
+                                   padding: .4rem 0; border-bottom: 1px solid #f0ebe3;
+                                   font-size: .88rem; color: #555;">
+                            <span style="color: var(--orange); font-size: .7rem;">●</span>
                             {{ responsabilidad }}
                         </li>
                         {% endfor %}
                     </ul>
                 </div>
             </div>
-        </div>
-        {% endfor %}
-    </div>
-    
-    <div class="row mt-5 pt-4">
-        <div class="col-lg-8 mx-auto text-center reveal">
-            <div class="card bg-primary-custom text-white">
-                <div class="card-body p-5">
-                    <i class="fas fa-users fa-3x mb-3"></i>
-                    <h3>Más de 10 años de experiencia combinada</h3>
-                    <p class="mb-0">
-                        Ingenieros civiles industriales con expertise en desarrollo web, 
-                        gestión de proyectos y transformación digital.
-                    </p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
-</div>
+</section>
+
+<!-- FRASE CIERRE -->
+<section style="background: var(--orange); padding: 5rem 5vw; text-align: center;">
+    <div class="reveal" style="max-width: 650px; margin: 0 auto;">
+        <p style="font-size: .8rem; letter-spacing: .18em; text-transform: uppercase;
+                  font-weight: 700; color: rgba(0,0,0,.5); margin-bottom: 1rem;">
+            Nuestro compromiso
+        </p>
+        <h2 style="font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+                   color: var(--ink); line-height: 1.15; margin-bottom: 1.5rem;">
+            No tenemos décadas de experiencia.<br>
+            <em>Tenemos algo mejor: cada proyecto es nuestra prioridad número uno.</em>
+        </h2>
+        <p style="color: rgba(0,0,0,.6); font-size: 1rem; line-height: 1.7; margin-bottom: 2rem;">
+            Somos estudiantes que viven el desarrollo web desde adentro, aplicando lo más nuevo 
+            en tecnología y diseño para que tu página no solo exista — sino que destaque.
+        </p>
+        <a href="/contacto" style="background: var(--ink); color: #fff;
+                                   padding: .9rem 2.2rem; text-decoration: none;
+                                   font-weight: 700; letter-spacing: .04em;
+                                   border-radius: 4px; display: inline-block;
+                                   transition: opacity .2s;"
+           onmouseover="this.style.opacity='.8'"
+           onmouseout="this.style.opacity='1'">
+            Hablemos de tu proyecto →
+        </a>
+    </div>
+</section>
+
 {% endblock %}
