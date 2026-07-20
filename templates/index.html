@@ -1,118 +1,86 @@
 {% extends "base.html" %}
-
 {% block content %}
-<!-- Hero Section - Formato vertical centrado -->
-<section class="hero" style="padding: 60px 0; text-align: center; min-height: 500px; display: flex; align-items: center;">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <!-- Logo1 grande centrado -->
-                <div class="hero-logo fade-in-up" style="margin-bottom: 30px;">
-                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="SertainsLabs" style="max-width: 200px; width: 100%;">
-                </div>
-                
-                <!-- Título centrado -->
-                <h1 class="fade-in-up delay-1" style="color: var(--beige-crema); margin-bottom: 20px; font-size: 3rem;">
-                    Transformamos tu presencia digital
-                </h1>
-                
-                <!-- Descripción centrada -->
-                <p class="lead fade-in-up delay-2" style="color: var(--beige-crema); margin-bottom: 35px; font-size: 1.2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-                    Desarrollo web profesional para empresas, emprendimientos y tiendas online. 
-                    Soluciones a medida que impulsan tu negocio.
-                </p>
-                
-                <!-- Botón centrado -->
-                <a href="/contacto" class="btn btn-primary btn-lg fade-in-up delay-3">
-                    <i class="fas fa-rocket"></i> Cotiza tu proyecto
-                </a>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-inner">
+        <p class="hero-eyebrow">Desarrollo web profesional</p>
+        <h1 class="hero-title">
+            Tu presencia digital,<br><em>hecha para convertir.</em>
+        </h1>
+        <p class="hero-sub">
+            Creamos sitios web para empresas, emprendimientos y tiendas online que no solo se ven bien — generan resultados.
+        </p>
+        <div class="hero-actions">
+            <a href="/contacto" class="btn-primary">Cotiza tu proyecto</a>
+            <a href="/servicios" class="btn-ghost">Ver servicios →</a>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="section-light">
+    <div class="section-inner">
+        <p class="eyebrow reveal">Lo que hacemos</p>
+        <h2 class="section-title reveal">Soluciones que <em>impulsan</em> tu negocio</h2>
+        <div class="cards-grid">
+            <div class="card reveal">
+                <span class="card-icon"><i class="fas fa-globe"></i></span>
+                <h3>Webs empresariales</h3>
+                <p>Sitios profesionales, rápidos y optimizados para que tus clientes te encuentren y confíen en ti.</p>
+            </div>
+            <div class="card reveal">
+                <span class="card-icon"><i class="fas fa-shopping-cart"></i></span>
+                <h3>E-commerce</h3>
+                <p>Tiendas online completas con carrito, pasarelas de pago chilenas y gestión de inventario.</p>
+            </div>
+            <div class="card reveal">
+                <span class="card-icon"><i class="fas fa-robot"></i></span>
+                <h3>Automatización</h3>
+                <p>Conectamos tus sistemas, automatizamos procesos y te liberamos tiempo para lo que importa.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Servicios Destacados -->
-<section class="container my-5">
-    <div class="text-center mb-5 reveal">
-        <h2>Soluciones que impulsan tu negocio</h2>
-        <p class="text-muted">Tecnología de vanguardia para resultados extraordinarios</p>
-    </div>
-    <div class="row g-4">
-        <div class="col-md-4 reveal delay-1">
-            <div class="card h-100">
-                <div class="card-body text-center">
-                    <i class="fas fa-globe card-icon"></i>
-                    <h3 class="card-title">Web Empresariales</h3>
-                    <p class="card-text">
-                        Sitios web profesionales con diseño moderno, responsive y optimizados para conversión.
-                    </p>
-                </div>
+<!-- POR QUÉ ELEGIRNOS -->
+<section class="section-dark">
+    <div class="section-inner">
+        <p class="eyebrow reveal" style="color: var(--orange-light);">Por qué SertainsLabs</p>
+        <h2 class="section-title reveal" style="color:#fff;">Trabajo serio,<br><em>resultados reales.</em></h2>
+        <div class="features-grid">
+            <div class="feature reveal">
+                <i class="fas fa-shield-alt"></i>
+                <h4>Seguridad profesional</h4>
+                <p>HTTPS, respaldos automáticos y protección de datos en cada proyecto.</p>
             </div>
-        </div>
-        <div class="col-md-4 reveal delay-2">
-            <div class="card h-100">
-                <div class="card-body text-center">
-                    <i class="fas fa-shopping-cart card-icon"></i>
-                    <h3 class="card-title">E-commerce</h3>
-                    <p class="card-text">
-                        Tiendas online completas con carrito de compras, pasarelas de pago y gestión de inventario.
-                    </p>
-                </div>
+            <div class="feature reveal">
+                <i class="fas fa-chart-line"></i>
+                <h4>Resultados medibles</h4>
+                <p>Optimización continua orientada a tu retorno de inversión.</p>
             </div>
-        </div>
-        <div class="col-md-4 reveal delay-3">
-            <div class="card h-100">
-                <div class="card-body text-center">
-                    <i class="fas fa-robot card-icon"></i>
-                    <h3 class="card-title">Automatización</h3>
-                    <p class="card-text">
-                        Automatiza procesos, integra sistemas y optimiza la eficiencia de tu negocio.
-                    </p>
-                </div>
+            <div class="feature reveal">
+                <i class="fas fa-headset"></i>
+                <h4>Soporte incluido</h4>
+                <p>Acompañamiento constante y resolución rápida de cualquier incidencia.</p>
+            </div>
+            <div class="feature reveal">
+                <i class="fas fa-bolt"></i>
+                <h4>Entrega rápida</h4>
+                <p>Plazos claros y cumplidos. Tu proyecto listo cuando lo necesitas.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Características -->
-<section class="features-section">
-    <div class="container">
-        <div class="text-center mb-5 reveal">
-            <h2>¿Por qué elegir SertainsLabs?</h2>
-            <p class="text-muted">Excelencia técnica y compromiso con tus resultados</p>
-        </div>
-        <div class="row">
-            <div class="col-md-4 reveal delay-1">
-                <div class="feature-item">
-                    <i class="fas fa-shield-alt feature-icon"></i>
-                    <h4>Seguridad garantizada</h4>
-                    <p>Estándares de seguridad profesionales y protección de datos.</p>
-                </div>
-            </div>
-            <div class="col-md-4 reveal delay-2">
-                <div class="feature-item">
-                    <i class="fas fa-chart-line feature-icon"></i>
-                    <h4>Resultados medibles</h4>
-                    <p>Optimización continua para maximizar tu retorno de inversión.</p>
-                </div>
-            </div>
-            <div class="col-md-4 reveal delay-3">
-                <div class="feature-item">
-                    <i class="fas fa-headset feature-icon"></i>
-                    <h4>Soporte 24/7</h4>
-                    <p>Acompañamiento constante y resolución rápida de incidencias.</p>
-                </div>
-            </div>
-        </div>
+<!-- CTA -->
+<section class="section-cta">
+    <div class="section-inner text-center">
+        <p class="eyebrow reveal">Da el primer paso</p>
+        <h2 class="section-title reveal">¿Listo para crecer<br><em>online?</em></h2>
+        <p class="section-sub reveal">Cuéntanos tu proyecto y te respondemos con una propuesta a medida.</p>
+        <a href="/contacto" class="btn-primary reveal">Solicitar asesoría gratuita</a>
     </div>
 </section>
 
-<!-- CTA Final -->
-<section class="container text-center my-5 py-5 reveal">
-    <h2>¿Listo para llevar tu negocio al siguiente nivel?</h2>
-    <p class="lead mb-4">Contáctanos hoy y descubre cómo podemos ayudarte</p>
-    <a href="/contacto" class="btn btn-primary btn-lg">
-        <i class="fas fa-envelope"></i> Solicitar asesoría
-    </a>
-</section>
 {% endblock %}
