@@ -5,44 +5,35 @@
     <div class="row">
         <div class="col-lg-7 mx-auto">
             <div class="text-center mb-4 reveal">
-                <h1 class="fade-in-up">Contáctanos</h1>
+                <h1 class="fade-in-up">Agendar Reunión</h1>
                 <p class="text-muted small">
-                    Cuéntanos tu proyecto y te responderemos en menos de 24 horas
+                    Cuéntanos tu proyecto y coordinamos una reunión para conversarlo. Te respondemos en menos de 24 horas.
                 </p>
             </div>
-            
+
             <div class="card shadow-sm border-0">
                 <div class="card-body p-4">
-                    <!-- FormSubmit -->
-                    <form action="https://formsubmit.co/tu-email@empresa.com" method="POST">
-                        <!-- Configuración de FormSubmit -->
-                        <input type="hidden" name="_subject" value="Nuevo contacto desde SertainsLabs">
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="_next" value="https://tu-dominio.onrender.com/gracias">
-                        
-                        <!-- Protección anti-spam (honeypot) -->
-                        <input type="text" name="_honey" style="display:none">
-                        
+                    <form action="{{ url_for('agendar') }}" method="POST">
+
                         <div class="row g-3">
                             <!-- Campo nombre -->
                             <div class="col-md-6">
                                 <label for="nombre" class="form-label small fw-bold">Nombre completo *</label>
                                 <input type="text" class="form-control form-control-sm" id="nombre" name="nombre" required>
                             </div>
-                            
+
                             <!-- Campo email -->
                             <div class="col-md-6">
                                 <label for="email" class="form-label small fw-bold">Correo electrónico *</label>
                                 <input type="email" class="form-control form-control-sm" id="email" name="email" required>
                             </div>
-                            
+
                             <!-- Campo empresa -->
                             <div class="col-12">
                                 <label for="empresa" class="form-label small fw-bold">Empresa / Emprendimiento</label>
                                 <input type="text" class="form-control form-control-sm" id="empresa" name="empresa">
                             </div>
-                            
+
                             <!-- Campo servicio -->
                             <div class="col-12">
                                 <label for="servicio" class="form-label small fw-bold">Servicio de interés *</label>
@@ -57,34 +48,36 @@
                                     <option value="otro">Otro</option>
                                 </select>
                             </div>
-                            
+
                             <!-- Campo mensaje -->
                             <div class="col-12">
-                                <label for="mensaje" class="form-label small fw-bold">Mensaje *</label>
+                                <label for="mensaje" class="form-label small fw-bold">Cuéntanos sobre tu proyecto *</label>
                                 <textarea class="form-control form-control-sm" id="mensaje" name="mensaje" rows="3" required></textarea>
                             </div>
-                            
-                            <!-- Checkbox privacidad -->
+
+                            <!-- Checkbox consentimiento Ley 19.628 -->
                             <div class="col-12">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="privacidad" name="privacidad" required>
                                     <label class="form-check-label small" for="privacidad">
-                                        Acepto la <a href="#" data-bs-toggle="modal" data-bs-target="#politicaModal">política de privacidad</a> *
+                                        He leído y acepto el
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#politicaModal">tratamiento de mis datos personales</a>
+                                        conforme a la Ley N° 19.628 sobre Protección de la Vida Privada *
                                     </label>
                                 </div>
                             </div>
-                            
+
                             <!-- Botón enviar -->
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary w-100 py-2">
-                                    <i class="fas fa-paper-plane"></i> Enviar mensaje
+                                    <i class="fas fa-paper-plane"></i> Agendar reunión
                                 </button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-            
+
             <!-- Información adicional compacta -->
             <div class="row mt-3 text-center">
                 <div class="col-4">
@@ -109,18 +102,30 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Política de Privacidad</h5>
+                <h5 class="modal-title">Política de Privacidad y Tratamiento de Datos Personales</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body small">
-                <p>En SertainsLabs SpA, tus datos serán utilizados exclusivamente para:</p>
+                <p><strong>Responsable del tratamiento:</strong> Sertains Labs SpA, con domicilio en Ñuñoa, Santiago, Chile.</p>
+
+                <p><strong>Datos que recopilamos:</strong> nombre, correo electrónico, nombre de empresa (opcional) y el contenido del mensaje que nos envías.</p>
+
+                <p><strong>Finalidad:</strong> conforme a la Ley N° 19.628 sobre Protección de la Vida Privada, tus datos serán tratados exclusivamente para:</p>
                 <ul>
-                    <li>Responder a tu consulta o solicitud</li>
-                    <li>Enviarte información relevante sobre nuestros servicios</li>
-                    <li>Mejorar nuestra atención al cliente</li>
+                    <li>Responder tu consulta y coordinar la reunión solicitada</li>
+                    <li>Elaborar propuestas o cotizaciones relacionadas con tu solicitud</li>
+                    <li>Contactarte por correo o teléfono respecto de este requerimiento</li>
                 </ul>
-                <p>No compartiremos tus datos con terceros sin tu consentimiento explícito.</p>
-                <p class="mb-0"><small>Última actualización: Enero 2025</small></p>
+
+                <p><strong>Almacenamiento:</strong> tus datos se guardan en una planilla de Google Sheets de uso interno de Sertains Labs SpA, con acceso restringido a los socios de la empresa.</p>
+
+                <p><strong>No cesión a terceros:</strong> no vendemos, arrendamos ni compartimos tus datos con terceros ajenos a Sertains Labs SpA, salvo obligación legal.</p>
+
+                <p><strong>Tus derechos:</strong> de acuerdo a la Ley 19.628, puedes ejercer en cualquier momento tus derechos de acceso, rectificación, cancelación y oposición (derechos ARCO) sobre tus datos personales, escribiendo a contacto@sertainslabs.cl.</p>
+
+                <p><strong>Conservación:</strong> conservamos tus datos solo mientras sea necesario para gestionar tu solicitud, o hasta que ejerzas tu derecho de cancelación.</p>
+
+                <p class="mb-0"><small>Última actualización: Julio 2026</small></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Aceptar</button>
