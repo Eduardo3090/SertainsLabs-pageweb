@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="SertainsLabs SpA - Desarrollo web empresarial para todo rubro.">
     <title>SertainsLabs SpA - Desarrollo web empresarial</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -13,30 +12,27 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-
 <nav id="mainNav">
     <a href="/" class="nav-brand">
-        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="SertainsLabs" style="height:48px; width:auto;">
+        <img src="{{ url_for('static', filename='img/logo-sertains-labs.png') }}" alt="SertainsLabs" style="height:48px; width:auto;">
     </a>
     <ul class="nav-links" id="navLinks">
         <li><a href="/">Inicio</a></li>
         <li><a href="/servicios">Servicios</a></li>
         <li><a href="/equipo">Equipo</a></li>
-        <li><a href="/contacto" class="nav-cta">Agendar llamada</a></li>
+        <li><a href="/contacto" class="nav-cta">Agendar reunión</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Menú">
         <span></span><span></span><span></span>
     </button>
 </nav>
-
 <main>
     {% block content %}{% endblock %}
 </main>
-
 <footer>
     <div class="footer-inner">
         <div class="footer-brand">
-            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="SertainsLabs" style="height:36px;">
+            <img src="{{ url_for('static', filename='img/logo-sertains-labs.png') }}" alt="SertainsLabs" style="height:36px;">
             <p>Desarrollo web profesional para empresas que quieren crecer.</p>
         </div>
         <div class="footer-links">
@@ -49,26 +45,22 @@
         <p>© 2026 SertainsLabs SpA — Todos los derechos reservados</p>
     </div>
 </footer>
-
 <script>
     // Navbar scroll
     const nav = document.getElementById('mainNav');
     window.addEventListener('scroll', () => {
         nav.classList.toggle('scrolled', window.scrollY > 40);
     });
-
     // Hamburger
     document.getElementById('hamburger').addEventListener('click', () => {
         document.getElementById('navLinks').classList.toggle('open');
     });
-
     // Reveal on scroll
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
-
 {% block scripts %}{% endblock %}
 </body>
 </html>
