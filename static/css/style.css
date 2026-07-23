@@ -89,6 +89,15 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
         radial-gradient(ellipse at 75% 30%, rgba(242,100,25,.16), transparent 55%),
         radial-gradient(ellipse at 10% 90%, rgba(247,147,76,.08), transparent 50%);
 }
+.hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    opacity: .35;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 120px 120px;
+    pointer-events: none;
+}
 .hero-inner { position: relative; z-index: 1; max-width: 720px; }
 .hero-eyebrow {
     font-size: .8rem; letter-spacing: .18em; text-transform: uppercase;
