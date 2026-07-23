@@ -1,136 +1,105 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container my-5">
-    <div class="text-center mb-5 reveal">
-        <h1 class="fade-in-up">Nuestros Servicios</h1>
-        <p class="lead text-muted">Soluciones integrales para cada necesidad digital</p>
-    </div>
-    
-    <div class="row g-4">
-        <!-- Servicio 1 -->
-        <div class="col-md-6 col-lg-4 reveal delay-1">
-            <div class="card h-100">
-                <div class="card-body">
-                    <i class="fas fa-building card-icon"></i>
-                    <h3 class="card-title">Web Empresariales</h3>
-                    <p class="card-text">
-                        Sitios web profesionales con diseño a medida, optimizados para SEO y experiencia de usuario. 
-                        Ideal para empresas que buscan credibilidad y presencia digital sólida.
-                    </p>
-                    <ul class="list-unstyled mt-3">
-                        <li><i class="fas fa-check text-primary"></i> Diseño responsive</li>
-                        <li><i class="fas fa-check text-primary"></i> Panel de administración</li>
-                        <li><i class="fas fa-check text-primary"></i> Optimización SEO</li>
-                        <li><i class="fas fa-check text-primary"></i> Certificado SSL</li>
-                    </ul>
-                </div>
-            </div>
+<section class="section-light" style="padding-top: 9rem;">
+    <div class="section-inner">
+        <div class="text-center reveal">
+            <p class="eyebrow">Lo que hacemos</p>
+            <h1 class="section-title">Servicios pensados para <em>tu crecimiento</em></h1>
+            <p class="section-sub">
+                Soluciones digitales completas, adaptadas al tamaño y momento de tu negocio.
+            </p>
         </div>
-        
-        <!-- Servicio 2 -->
-        <div class="col-md-6 col-lg-4 reveal delay-2">
-            <div class="card h-100">
-                <div class="card-body">
-                    <i class="fas fa-shopping-cart card-icon"></i>
-                    <h3 class="card-title">Tiendas Online / E-commerce</h3>
-                    <p class="card-text">
-                        Plataformas de venta completas con gestión de productos, carrito de compras y pasarelas de pago.
-                        Perfecto para emprendedores y retailers.
-                    </p>
-                    <ul class="list-unstyled mt-3">
-                        <li><i class="fas fa-check text-primary"></i> Catálogo de productos</li>
-                        <li><i class="fas fa-check text-primary"></i> Múltiples métodos de pago</li>
-                        <li><i class="fas fa-check text-primary"></i> Gestión de inventario</li>
-                        <li><i class="fas fa-check text-primary"></i> Reportes de ventas</li>
-                    </ul>
-                </div>
+
+        <div class="services-grid">
+            <!-- Servicio 1 -->
+            <div class="service-card reveal">
+                <span class="service-card-icon"><i class="fas fa-building"></i></span>
+                <h3>Web Empresariales</h3>
+                <p>Sitios web profesionales con diseño a medida, optimizados para SEO y experiencia de usuario. Ideal para empresas que buscan credibilidad y presencia digital sólida.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Diseño responsive</li>
+                    <li><i class="fas fa-check"></i> Panel de administración</li>
+                    <li><i class="fas fa-check"></i> Optimización SEO</li>
+                    <li><i class="fas fa-check"></i> Certificado SSL</li>
+                </ul>
             </div>
-        </div>
-        
-        <!-- Servicio 3 -->
-        <div class="col-md-6 col-lg-4 reveal delay-3">
-            <div class="card h-100">
-                <div class="card-body">
-                    <i class="fas fa-robot card-icon"></i>
-                    <h3 class="card-title">Automatización de Procesos</h3>
-                    <p class="card-text">
-                        Optimiza tus operaciones con automatizaciones a medida. Integra sistemas, programa tareas y reduce costos operativos.
-                    </p>
-                    <ul class="list-unstyled mt-3">
-                        <li><i class="fas fa-check text-primary"></i> Integración con APIs</li>
-                        <li><i class="fas fa-check text-primary"></i> Automatización de emails</li>
-                        <li><i class="fas fa-check text-primary"></i> Gestión de documentos</li>
-                        <li><i class="fas fa-check text-primary"></i> Reportes automáticos</li>
-                    </ul>
-                </div>
+
+            <!-- Servicio 2 -->
+            <div class="service-card reveal">
+                <span class="service-card-icon"><i class="fas fa-shopping-cart"></i></span>
+                <h3>Tiendas Online / E-commerce</h3>
+                <p>Plataformas de venta completas con gestión de productos, carrito de compras y pasarelas de pago. Perfecto para emprendedores y retailers.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Catálogo de productos</li>
+                    <li><i class="fas fa-check"></i> Múltiples métodos de pago</li>
+                    <li><i class="fas fa-check"></i> Gestión de inventario</li>
+                    <li><i class="fas fa-check"></i> Reportes de ventas</li>
+                </ul>
             </div>
-        </div>
-        
-        <!-- Servicio 4 -->
-        <div class="col-md-6 col-lg-4 reveal delay-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <i class="fas fa-chart-line card-icon"></i>
-                    <h3 class="card-title">Optimización SEO</h3>
-                    <p class="card-text">
-                        Mejora tu posicionamiento en buscadores y atrae más clientes potenciales. Estrategias probadas para aumentar tu visibilidad.
-                    </p>
-                    <ul class="list-unstyled mt-3">
-                        <li><i class="fas fa-check text-primary"></i> Auditoría SEO completa</li>
-                        <li><i class="fas fa-check text-primary"></i> Optimización on-page</li>
-                        <li><i class="fas fa-check text-primary"></i> Estrategia de keywords</li>
-                        <li><i class="fas fa-check text-primary"></i> Reportes mensuales</li>
-                    </ul>
-                </div>
+
+            <!-- Servicio 3 -->
+            <div class="service-card reveal">
+                <span class="service-card-icon"><i class="fas fa-robot"></i></span>
+                <h3>Automatización de Procesos</h3>
+                <p>Optimiza tus operaciones con automatizaciones a medida. Integra sistemas, programa tareas y reduce costos operativos.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Integración con APIs</li>
+                    <li><i class="fas fa-check"></i> Automatización de emails</li>
+                    <li><i class="fas fa-check"></i> Gestión de documentos</li>
+                    <li><i class="fas fa-check"></i> Reportes automáticos</li>
+                </ul>
             </div>
-        </div>
-        
-        <!-- Servicio 5 -->
-        <div class="col-md-6 col-lg-4 reveal delay-5">
-            <div class="card h-100">
-                <div class="card-body">
-                    <i class="fas fa-paintbrush card-icon"></i>
-                    <h3 class="card-title">Rediseño Web</h3>
-                    <p class="card-text">
-                        Actualiza la imagen de tu empresa con un diseño moderno, funcional y adaptado a las tendencias actuales.
-                    </p>
-                    <ul class="list-unstyled mt-3">
-                        <li><i class="fas fa-check text-primary"></i> Diseño UX/UI actualizado</li>
-                        <li><i class="fas fa-check text-primary"></i> Mejora de rendimiento</li>
-                        <li><i class="fas fa-check text-primary"></i> Migración de contenido</li>
-                        <li><i class="fas fa-check text-primary"></i> Mantenimiento post-lanzamiento</li>
-                    </ul>
-                </div>
+
+            <!-- Servicio 4 -->
+            <div class="service-card reveal">
+                <span class="service-card-icon"><i class="fas fa-chart-line"></i></span>
+                <h3>Optimización SEO</h3>
+                <p>Mejora tu posicionamiento en buscadores y atrae más clientes potenciales. Estrategias probadas para aumentar tu visibilidad.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Auditoría SEO completa</li>
+                    <li><i class="fas fa-check"></i> Optimización on-page</li>
+                    <li><i class="fas fa-check"></i> Estrategia de keywords</li>
+                    <li><i class="fas fa-check"></i> Reportes mensuales</li>
+                </ul>
             </div>
-        </div>
-        
-        <!-- Servicio 6 -->
-        <div class="col-md-6 col-lg-4 reveal delay-5">
-            <div class="card h-100">
-                <div class="card-body">
-                    <i class="fas fa-headset card-icon"></i>
-                    <h3 class="card-title">Mantenimiento y Soporte</h3>
-                    <p class="card-text">
-                        Asegura el funcionamiento óptimo de tu sitio con planes de mantenimiento preventivo y soporte técnico dedicado.
-                    </p>
-                    <ul class="list-unstyled mt-3">
-                        <li><i class="fas fa-check text-primary"></i> Actualizaciones de seguridad</li>
-                        <li><i class="fas fa-check text-primary"></i> Backups regulares</li>
-                        <li><i class="fas fa-check text-primary"></i> Monitoreo 24/7</li>
-                        <li><i class="fas fa-check text-primary"></i> Soporte prioritario</li>
-                    </ul>
-                </div>
+
+            <!-- Servicio 5 -->
+            <div class="service-card reveal">
+                <span class="service-card-icon"><i class="fas fa-paintbrush"></i></span>
+                <h3>Rediseño Web</h3>
+                <p>Actualiza la imagen de tu empresa con un diseño moderno, funcional y adaptado a las tendencias actuales.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Diseño UX/UI actualizado</li>
+                    <li><i class="fas fa-check"></i> Mejora de rendimiento</li>
+                    <li><i class="fas fa-check"></i> Migración de contenido</li>
+                    <li><i class="fas fa-check"></i> Mantenimiento post-lanzamiento</li>
+                </ul>
+            </div>
+
+            <!-- Servicio 6 -->
+            <div class="service-card reveal">
+                <span class="service-card-icon"><i class="fas fa-headset"></i></span>
+                <h3>Mantenimiento y Soporte</h3>
+                <p>Asegura el funcionamiento óptimo de tu sitio con planes de mantenimiento preventivo y soporte técnico dedicado.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Actualizaciones de seguridad</li>
+                    <li><i class="fas fa-check"></i> Backups regulares</li>
+                    <li><i class="fas fa-check"></i> Monitoreo 24/7</li>
+                    <li><i class="fas fa-check"></i> Soporte prioritario</li>
+                </ul>
             </div>
         </div>
     </div>
-    
-    <!-- CTA -->
-    <div class="text-center mt-5 pt-4 reveal">
-        <p class="lead">¿Necesitas una solución personalizada?</p>
-        <a href="/contacto" class="btn btn-primary btn-lg">
-            <i class="fas fa-comments"></i> Hablemos de tu proyecto
-        </a>
+</section>
+
+<!-- CTA -->
+<section class="section-cta">
+    <div class="section-inner text-center">
+        <p class="eyebrow reveal">¿Tienes algo distinto en mente?</p>
+        <h2 class="section-title reveal">Hablemos de <em>tu proyecto</em></h2>
+        <p class="section-sub reveal">Cuéntanos qué necesitas y armamos una propuesta a tu medida.</p>
+        <a href="/contacto" class="btn-primary reveal">Hablemos de tu proyecto</a>
     </div>
-</div>
+</section>
 {% endblock %}
