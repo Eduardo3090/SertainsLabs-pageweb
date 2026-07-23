@@ -6,7 +6,7 @@
     --mid:          #444444;
     --muted:        #888888;
     --cream:        #FAF8F4;
-    --white:        #FFFFFF;
+    --white:        #F7EDDD;
     --border:       #E8E3DB;
     --serif:        'Lora', Georgia, serif;
     --sans:         'Inter', system-ui, sans-serif;
@@ -74,23 +74,20 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 }
 .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,.06); }
 
-/* ── HERO ─────────────────────────────────────────────── */
-.hero {
-    min-height: 100vh;
-    display: flex; align-items: center;
-    padding: 8rem 5vw 6rem;
-    background: #0d0d0d;
+/* ── TEXTURA DE TELA (reutilizable) ───────────────────── */
+.hero, .section-dark, footer {
     position: relative; overflow: hidden;
 }
-.hero::before {
+.hero::before, .section-dark::before, footer::before {
     content: '';
     position: absolute; inset: 0;
     background-image:
         repeating-linear-gradient(45deg, rgba(255,255,255,.025) 0px, rgba(255,255,255,.025) 1px, transparent 1px, transparent 4px),
         repeating-linear-gradient(-45deg, rgba(255,255,255,.02) 0px, rgba(255,255,255,.02) 1px, transparent 1px, transparent 4px);
     background-size: 6px 6px;
+    pointer-events: none;
 }
-.hero::after {
+.hero::after, .section-dark::after, footer::after {
     content: '';
     position: absolute; inset: 0;
     opacity: .5;
@@ -98,6 +95,36 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 100px 100px;
     pointer-events: none;
+}
+
+.section-light, .section-cta {
+    position: relative; overflow: hidden;
+}
+.section-light::before, .section-cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+        repeating-linear-gradient(45deg, rgba(0,0,0,.02) 0px, rgba(0,0,0,.02) 1px, transparent 1px, transparent 4px),
+        repeating-linear-gradient(-45deg, rgba(0,0,0,.015) 0px, rgba(0,0,0,.015) 1px, transparent 1px, transparent 4px);
+    background-size: 6px 6px;
+    pointer-events: none;
+}
+.section-light::after, .section-cta::after {
+    content: '';
+    position: absolute; inset: 0;
+    opacity: .3;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 100px 100px;
+    pointer-events: none;
+}
+
+/* ── HERO ─────────────────────────────────────────────── */
+.hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 5vw 6rem;
+    background: #0d0d0d;
 }
 .hero-inner { position: relative; z-index: 1; max-width: 720px; }
 .hero-eyebrow {
@@ -125,7 +152,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
 /* ── SECCIONES ────────────────────────────────────────── */
-.section-inner { max-width: 1100px; margin: 0 auto; }
+.section-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
 .section-light { background: var(--white); padding: 7rem 5vw; }
 .section-dark  { background: var(--ink);   padding: 7rem 5vw; }
 .section-cta   { background: var(--cream); padding: 7rem 5vw; text-align: center; }
@@ -256,12 +283,13 @@ footer {
 .footer-inner {
     display: flex; justify-content: space-between; align-items: flex-start;
     gap: 2rem; flex-wrap: wrap; margin-bottom: 2.5rem;
+    position: relative; z-index: 1;
 }
 .footer-brand p { font-size: .85rem; color: rgba(255,255,255,.4); margin-top: .6rem; max-width: 28ch; }
 .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; }
 .footer-links a { font-size: .85rem; color: rgba(255,255,255,.45); text-decoration: none; transition: color .2s; }
 .footer-links a:hover { color: #fff; }
-.footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem; position: relative; z-index: 1; }
 .footer-bottom p { font-size: .78rem; color: rgba(255,255,255,.25); }
 
 /* ── RESPONSIVE ───────────────────────────────────────── */
