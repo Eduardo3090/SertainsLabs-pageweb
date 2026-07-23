@@ -1,136 +1,106 @@
 {% extends "base.html" %}
-
 {% block content %}
-<div class="container my-4">
-    <div class="row">
-        <div class="col-lg-7 mx-auto">
-            <div class="text-center mb-4 reveal">
-                <h1 class="fade-in-up">Agendar Reunión</h1>
-                <p class="text-muted small">
-                    Cuéntanos tu proyecto y coordinamos una reunión para conversarlo. Te respondemos en menos de 24 horas.
-                </p>
-            </div>
 
-            <div class="card shadow-sm border-0">
-                <div class="card-body p-4">
-                    <form action="{{ url_for('agendar') }}" method="POST">
-
-                        <div class="row g-3">
-                            <!-- Campo nombre -->
-                            <div class="col-md-6">
-                                <label for="nombre" class="form-label small fw-bold">Nombre completo *</label>
-                                <input type="text" class="form-control form-control-sm" id="nombre" name="nombre" required>
-                            </div>
-
-                            <!-- Campo email -->
-                            <div class="col-md-6">
-                                <label for="email" class="form-label small fw-bold">Correo electrónico *</label>
-                                <input type="email" class="form-control form-control-sm" id="email" name="email" required>
-                            </div>
-
-                            <!-- Campo empresa -->
-                            <div class="col-12">
-                                <label for="empresa" class="form-label small fw-bold">Empresa / Emprendimiento</label>
-                                <input type="text" class="form-control form-control-sm" id="empresa" name="empresa">
-                            </div>
-
-                            <!-- Campo servicio -->
-                            <div class="col-12">
-                                <label for="servicio" class="form-label small fw-bold">Servicio de interés *</label>
-                                <select class="form-select form-select-sm" id="servicio" name="servicio" required>
-                                    <option value="">Selecciona una opción</option>
-                                    <option value="web_empresarial">Web Empresarial</option>
-                                    <option value="ecommerce">Tienda Online / E-commerce</option>
-                                    <option value="automatizacion">Automatización de procesos</option>
-                                    <option value="seo">Optimización SEO</option>
-                                    <option value="rediseno">Rediseño web</option>
-                                    <option value="mantenimiento">Mantenimiento y soporte</option>
-                                    <option value="otro">Otro</option>
-                                </select>
-                            </div>
-
-                            <!-- Campo mensaje -->
-                            <div class="col-12">
-                                <label for="mensaje" class="form-label small fw-bold">Cuéntanos sobre tu proyecto *</label>
-                                <textarea class="form-control form-control-sm" id="mensaje" name="mensaje" rows="3" required></textarea>
-                            </div>
-
-                            <!-- Checkbox consentimiento Ley 19.628 -->
-                            <div class="col-12">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="privacidad" name="privacidad" required>
-                                    <label class="form-check-label small" for="privacidad">
-                                        He leído y acepto el
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#politicaModal">tratamiento de mis datos personales</a>
-                                        conforme a la Ley N° 19.628 sobre Protección de la Vida Privada *
-                                    </label>
-                                </div>
-                            </div>
-
-                            <!-- Botón enviar -->
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-primary w-100 py-2">
-                                    <i class="fas fa-paper-plane"></i> Agendar reunión
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Información adicional compacta -->
-            <div class="row mt-3 text-center">
-                <div class="col-4">
-                    <i class="fas fa-envelope text-primary small"></i>
-                    <p class="small text-muted mb-0">contacto@sertainslabs.cl</p>
-                </div>
-                <div class="col-4">
-                    <i class="fas fa-phone text-primary small"></i>
-                    <p class="small text-muted mb-0">+56 2 1234 5678</p>
-                </div>
-                <div class="col-4">
-                    <i class="fas fa-clock text-primary small"></i>
-                    <p class="small text-muted mb-0">Lun a Vie 9-18</p>
-                </div>
-            </div>
-        </div>
+<!-- HERO -->
+<div class="contact-hero">
+    <div class="contact-hero-inner reveal">
+        <p class="eyebrow">Agenda tu reunión</p>
+        <h1>Hablemos de <em>tu proyecto.</em></h1>
+        <p>Cuéntanos qué necesitas y coordinamos una reunión. Te respondemos en menos de 24 horas.</p>
     </div>
 </div>
 
-<!-- Modal Política de Privacidad -->
-<div class="modal fade" id="politicaModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Política de Privacidad y Tratamiento de Datos Personales</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+<!-- FORMULARIO -->
+<section class="contact-section">
+    <div class="contact-wrap">
+        <div class="contact-card reveal">
+            <form action="{{ url_for('agendar') }}" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="nombre">Nombre completo *</label>
+                        <input class="form-input" type="text" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="email">Correo electrónico *</label>
+                        <input class="form-input" type="email" id="email" name="email" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="empresa">Empresa / Emprendimiento</label>
+                    <input class="form-input" type="text" id="empresa" name="empresa">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="servicio">Servicio de interés *</label>
+                    <select class="form-select" id="servicio" name="servicio" required>
+                        <option value="">Selecciona una opción</option>
+                        <option value="web_empresarial">Web Empresarial</option>
+                        <option value="ecommerce">Tienda Online / E-commerce</option>
+                        <option value="automatizacion">Automatización de procesos</option>
+                        <option value="seo">Optimización SEO</option>
+                        <option value="rediseno">Rediseño web</option>
+                        <option value="mantenimiento">Mantenimiento y soporte</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="mensaje">Cuéntanos sobre tu proyecto *</label>
+                    <textarea class="form-textarea" id="mensaje" name="mensaje" rows="4" required></textarea>
+                </div>
+
+                <div class="form-consent">
+                    <input type="checkbox" id="privacidad" name="privacidad" required>
+                    <label for="privacidad">
+                        He leído y acepto el
+                        <a onclick="document.getElementById('politicaModal').classList.add('open')">tratamiento de mis datos personales</a>
+                        conforme a la Ley N° 19.628 sobre Protección de la Vida Privada *
+                    </label>
+                </div>
+
+                <button type="submit" class="form-submit">
+                    <i class="fas fa-paper-plane"></i> Agendar reunión
+                </button>
+            </form>
+        </div>
+
+        <div class="contact-meta reveal">
+            <div class="contact-meta-item">
+                <i class="fas fa-envelope"></i>
+                <span>contacto@sertainslabs.cl</span>
             </div>
-            <div class="modal-body small">
-                <p><strong>Responsable del tratamiento:</strong> Sertains Labs SpA, con domicilio en Ñuñoa, Santiago, Chile.</p>
-
-                <p><strong>Datos que recopilamos:</strong> nombre, correo electrónico, nombre de empresa (opcional) y el contenido del mensaje que nos envías.</p>
-
-                <p><strong>Finalidad:</strong> conforme a la Ley N° 19.628 sobre Protección de la Vida Privada, tus datos serán tratados exclusivamente para:</p>
-                <ul>
-                    <li>Responder tu consulta y coordinar la reunión solicitada</li>
-                    <li>Elaborar propuestas o cotizaciones relacionadas con tu solicitud</li>
-                    <li>Contactarte por correo o teléfono respecto de este requerimiento</li>
-                </ul>
-
-                <p><strong>Almacenamiento:</strong> tus datos se guardan en una planilla de Google Sheets de uso interno de Sertains Labs SpA, con acceso restringido a los socios de la empresa.</p>
-
-                <p><strong>No cesión a terceros:</strong> no vendemos, arrendamos ni compartimos tus datos con terceros ajenos a Sertains Labs SpA, salvo obligación legal.</p>
-
-                <p><strong>Tus derechos:</strong> de acuerdo a la Ley 19.628, puedes ejercer en cualquier momento tus derechos de acceso, rectificación, cancelación y oposición (derechos ARCO) sobre tus datos personales, escribiendo a contacto@sertainslabs.cl.</p>
-
-                <p><strong>Conservación:</strong> conservamos tus datos solo mientras sea necesario para gestionar tu solicitud, o hasta que ejerzas tu derecho de cancelación.</p>
-
-                <p class="mb-0"><small>Última actualización: Julio 2026</small></p>
+            <div class="contact-meta-item">
+                <i class="fas fa-phone"></i>
+                <span>+56 2 1234 5678</span>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Aceptar</button>
+            <div class="contact-meta-item">
+                <i class="fas fa-clock"></i>
+                <span>Lun a Vie 9-18</span>
             </div>
         </div>
     </div>
+</section>
+
+<!-- MODAL PRIVACIDAD (propio, sin Bootstrap) -->
+<div class="modal-overlay" id="politicaModal" onclick="if(event.target === this) this.classList.remove('open')">
+    <div class="modal-box">
+        <button class="modal-close" onclick="document.getElementById('politicaModal').classList.remove('open')">&times;</button>
+        <h3>Política de Privacidad y Tratamiento de Datos Personales</h3>
+        <p><strong>Responsable del tratamiento:</strong> Sertains Labs SpA, con domicilio en Ñuñoa, Santiago, Chile.</p>
+        <p><strong>Datos que recopilamos:</strong> nombre, correo electrónico, nombre de empresa (opcional) y el contenido del mensaje que nos envías.</p>
+        <p><strong>Finalidad:</strong> conforme a la Ley N° 19.628 sobre Protección de la Vida Privada, tus datos serán tratados exclusivamente para:</p>
+        <ul>
+            <li>Responder tu consulta y coordinar la reunión solicitada</li>
+            <li>Elaborar propuestas o cotizaciones relacionadas con tu solicitud</li>
+            <li>Contactarte por correo o teléfono respecto de este requerimiento</li>
+        </ul>
+        <p><strong>Almacenamiento:</strong> tus datos se guardan en una planilla de Google Sheets de uso interno de Sertains Labs SpA, con acceso restringido a los socios de la empresa.</p>
+        <p><strong>No cesión a terceros:</strong> no vendemos, arrendamos ni compartimos tus datos con terceros ajenos a Sertains Labs SpA, salvo obligación legal.</p>
+        <p><strong>Tus derechos:</strong> de acuerdo a la Ley 19.628, puedes ejercer en cualquier momento tus derechos de acceso, rectificación, cancelación y oposición (derechos ARCO) sobre tus datos personales, escribiendo a contacto@sertainslabs.cl.</p>
+        <p><strong>Conservación:</strong> conservamos tus datos solo mientras sea necesario para gestionar tu solicitud, o hasta que ejerzas tu derecho de cancelación.</p>
+        <p style="font-size:.78rem; color:var(--muted); margin-bottom:0;">Última actualización: Julio 2026</p>
+    </div>
 </div>
+
 {% endblock %}
