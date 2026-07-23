@@ -75,10 +75,10 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,.06); }
 
 /* ── TEXTURA DE TELA (reutilizable) ───────────────────── */
-.hero, .section-dark, footer {
+.hero, .section-dark, footer, .contact-hero {
     position: relative; overflow: hidden;
 }
-.hero::before, .section-dark::before, footer::before {
+.hero::before, .section-dark::before, footer::before, .contact-hero::before {
     content: '';
     position: absolute; inset: 0;
     background-image:
@@ -87,7 +87,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
     background-size: 6px 6px;
     pointer-events: none;
 }
-.hero::after, .section-dark::after, footer::after {
+.hero::after, .section-dark::after, footer::after, .contact-hero::after {
     content: '';
     position: absolute; inset: 0;
     opacity: .5;
@@ -269,6 +269,102 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 .feature h4 { font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: .4rem; }
 .feature p  { font-size: .85rem; color: rgba(255,255,255,.45); line-height: 1.65; }
 
+/* ── CONTACTO / FORMULARIO ────────────────────────────── */
+.contact-hero {
+    background: #0d0d0d;
+    padding: 8rem 5vw 6rem;
+    position: relative; overflow: hidden;
+}
+.contact-hero-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; text-align: center; }
+.contact-hero .eyebrow { color: var(--orange-light); }
+.contact-hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    color: #fff; line-height: 1.1; margin-bottom: 1rem;
+}
+.contact-hero h1 em { color: var(--orange-light); font-style: italic; }
+.contact-hero p {
+    color: rgba(255,255,255,.6); font-size: 1.05rem; line-height: 1.6;
+}
+
+.contact-section {
+    background: var(--cream);
+    padding: 0 5vw 7rem;
+    position: relative;
+}
+.contact-wrap { max-width: 620px; margin: -3.5rem auto 0; position: relative; z-index: 2; }
+
+.contact-card {
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 60px rgba(0,0,0,.1);
+    padding: 2.6rem 2.4rem;
+}
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.form-group { margin-bottom: 1.2rem; }
+.form-label { display: block; font-size: .82rem; font-weight: 600; color: var(--ink); margin-bottom: .4rem; }
+.form-input, .form-select, .form-textarea {
+    width: 100%; padding: .7rem .9rem; font-size: .92rem; font-family: var(--sans);
+    border: 1.5px solid var(--border); border-radius: 6px; background: var(--cream);
+    color: var(--ink); transition: border-color .2s, background .2s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+    outline: none; border-color: var(--orange); background: #fff;
+}
+.form-textarea { resize: vertical; min-height: 100px; }
+
+.form-consent { display: flex; align-items: flex-start; gap: .6rem; margin: 1.6rem 0; }
+.form-consent input[type="checkbox"] { margin-top: .2rem; accent-color: var(--orange); width: 16px; height: 16px; flex-shrink: 0; }
+.form-consent label { font-size: .82rem; color: var(--mid); line-height: 1.5; }
+.form-consent a { color: var(--orange); text-decoration: underline; cursor: pointer; }
+
+.form-submit {
+    width: 100%; display: flex; align-items: center; justify-content: center; gap: .6rem;
+    background: var(--orange); color: #fff; border: none; border-radius: 6px;
+    padding: .95rem; font-size: 1rem; font-weight: 700; cursor: pointer;
+    transition: background .2s, transform .2s;
+}
+.form-submit:hover { background: var(--orange-light); transform: translateY(-1px); }
+
+.contact-meta {
+    display: flex; justify-content: center; gap: 2.4rem; flex-wrap: wrap;
+    margin-top: 2.4rem; text-align: center;
+}
+.contact-meta-item { display: flex; flex-direction: column; align-items: center; gap: .4rem; }
+.contact-meta-item i { color: var(--orange); font-size: 1.1rem; }
+.contact-meta-item span { font-size: .82rem; color: var(--muted); }
+
+/* ── MODAL PROPIO (sin Bootstrap) ─────────────────────── */
+.modal-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(17,17,17,.65);
+    align-items: center; justify-content: center;
+    padding: 2rem;
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+    background: #fff; border-radius: 12px;
+    max-width: 560px; width: 100%;
+    max-height: 82vh; overflow-y: auto;
+    padding: 2.2rem 2rem;
+    position: relative;
+    box-shadow: 0 30px 80px rgba(0,0,0,.35);
+}
+.modal-box h3 {
+    font-family: var(--serif); font-size: 1.4rem; margin-bottom: 1.2rem; color: var(--ink);
+}
+.modal-box p { font-size: .88rem; color: var(--mid); line-height: 1.65; margin-bottom: .9rem; }
+.modal-box p strong { color: var(--ink); }
+.modal-box ul { margin: -0.3rem 0 .9rem 1.2rem; font-size: .88rem; color: var(--mid); line-height: 1.7; }
+.modal-close {
+    position: absolute; top: 1.2rem; right: 1.2rem;
+    background: none; border: none; font-size: 1.4rem; color: var(--muted); cursor: pointer; line-height: 1;
+}
+.modal-close:hover { color: var(--ink); }
+
 /* ── ANIMACIONES ──────────────────────────────────────── */
 .reveal {
     opacity: 0; transform: translateY(24px);
@@ -306,4 +402,6 @@ footer {
     .hero-actions { flex-direction: column; }
     .footer-inner { flex-direction: column; }
     .services-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .contact-wrap { margin-top: -2rem; }
 }
