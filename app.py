@@ -3,6 +3,8 @@ from datetime import datetime
 from sheets import guardar_contacto
 import smtplib
 import os
+import resend
+import os
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
@@ -10,33 +12,26 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'tu-clave-secreta-cambia-esto-en-produccion'
 
 
+resend.api_key = os.environ.get('RESEND_API_KEY')
+
 def enviar_correo_contacto(nombre, email_cliente, empresa, servicio, mensaje):
-    remitente = os.environ.get('EMAIL_USER')
-    password = os.environ.get('EMAIL_PASSWORD')
-    destinatario = os.environ.get('EMAIL_TO')
-
-    msg = MIMEMultipart()
-    msg['From'] = remitente
-    msg['To'] = destinatario
-    msg['Subject'] = f'Nueva solicitud de reunión - {nombre}'
-    msg['Reply-To'] = email_cliente
-
-    cuerpo = f"""Nueva solicitud desde sertainslabs.cl
-
-Nombre completo: {nombre}
-Correo electrónico: {email_cliente}
-Empresa/Emprendimiento: {empresa or 'No especificado'}
-Servicio de interés: {servicio or 'No especificado'}
-
-Mensaje del cliente:
-{mensaje}
-"""
-    msg.attach(MIMEText(cuerpo, 'plain'))
-
+    cuerpo_html = f"""
+    <h2>Nueva solicitud desde sertainslabs.cl</h2>
+    <p><strong>Nombre completo:</strong> {nombre}</p>
+    <p><strong>Correo electrónico:</strong> {email_cliente}</p>
+    <p><strong>Empresa/Emprendimiento:</strong> {empresa or 'No especificado'}</p>
+    <p><strong>Servicio de interés:</strong> {servicio or 'No especificado'}</p>
+    <p><strong>Mensaje del cliente:</strong></p>
+    <p>{mensaje}</p>
+    """
     try:
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465, timeout=10) as server:
-            server.login(remitente, password)
-            server.sendmail(remitente, destinatario, msg.as_string())
+        resend.Emails.send({
+            "from": "Sertains Labs <onboarding@resend.dev>",
+            "to": ["sertainslabs@gmail.com"],
+            "reply_to": email_cliente,
+            "subject": f"Nueva solicitud de reunión - {nombre}",
+            "html": cuerpo_html,
+        })
         return True
     except Exception as e:
         print(f"Error enviando correo: {e}")
