@@ -34,9 +34,9 @@ Mensaje del cliente:
     msg.attach(MIMEText(cuerpo, 'plain'))
 
     try:
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
-            server.login(remitente, password)
-            server.sendmail(remitente, destinatario, msg.as_string())
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465, timeout=10) as server:
+        server.login(remitente, password)
+        server.sendmail(remitente, destinatario, msg.as_string())
         return True
     except Exception as e:
         print(f"Error enviando correo: {e}")
