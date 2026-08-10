@@ -75,10 +75,10 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,.06); }
 
 /* ── TEXTURA DE TELA (reutilizable) ───────────────────── */
-.hero, .section-dark, footer, .contact-hero, .contact-section {
+.hero, .section-dark, footer, .contact-hero {
     position: relative; overflow: hidden;
 }
-.hero::before, .section-dark::before, footer::before, .contact-hero::before, .contact-section::before {
+.hero::before, .section-dark::before, footer::before, .contact-hero::before {
     content: '';
     position: absolute; inset: 0;
     background-image:
@@ -87,7 +87,31 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
     background-size: 6px 6px;
     pointer-events: none;
 }
-.hero::after, .section-dark::after, footer::after, .contact-hero::after, .contact-section::after {
+.hero::after, .section-dark::after, footer::after, .contact-hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    opacity: .5;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 100px 100px;
+    pointer-events: none;
+}
+
+/* .contact-section: SIN overflow:hidden a propósito, para no cortar
+   la tarjeta que sube con margin negativo (.contact-wrap) */
+.contact-section {
+    position: relative;
+}
+.contact-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+        repeating-linear-gradient(45deg, rgba(255,255,255,.025) 0px, rgba(255,255,255,.025) 1px, transparent 1px, transparent 4px),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,.02) 0px, rgba(255,255,255,.02) 1px, transparent 1px, transparent 4px);
+    background-size: 6px 6px;
+    pointer-events: none;
+}
+.contact-section::after {
     content: '';
     position: absolute; inset: 0;
     opacity: .5;
@@ -295,11 +319,35 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 .contact-wrap { max-width: 620px; margin: -3.5rem auto 0; position: relative; z-index: 2; }
 
 .contact-card {
-    background: #fff;
+    background: var(--cream);
     border-radius: 14px;
     border: 1px solid var(--border);
     box-shadow: 0 20px 60px rgba(0,0,0,.1);
     padding: 2.6rem 2.4rem;
+    position: relative;
+    overflow: hidden;
+}
+.contact-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+        repeating-linear-gradient(45deg, rgba(0,0,0,.02) 0px, rgba(0,0,0,.02) 1px, transparent 1px, transparent 4px),
+        repeating-linear-gradient(-45deg, rgba(0,0,0,.015) 0px, rgba(0,0,0,.015) 1px, transparent 1px, transparent 4px);
+    background-size: 6px 6px;
+    pointer-events: none;
+}
+.contact-card::after {
+    content: '';
+    position: absolute; inset: 0;
+    opacity: .3;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 100px 100px;
+    pointer-events: none;
+}
+.contact-card form {
+    position: relative;
+    z-index: 1;
 }
 
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
@@ -346,12 +394,16 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 }
 .modal-overlay.open { display: flex; }
 .modal-box {
-    background: #fff; border-radius: 12px;
+    background: var(--cream); border-radius: 12px;
     max-width: 560px; width: 100%;
     max-height: 82vh; overflow-y: auto;
     padding: 2.2rem 2rem;
     position: relative;
     box-shadow: 0 30px 80px rgba(0,0,0,.35);
+    background-image:
+        repeating-linear-gradient(45deg, rgba(0,0,0,.02) 0px, rgba(0,0,0,.02) 1px, transparent 1px, transparent 4px),
+        repeating-linear-gradient(-45deg, rgba(0,0,0,.015) 0px, rgba(0,0,0,.015) 1px, transparent 1px, transparent 4px);
+    background-size: 6px 6px;
 }
 .modal-box h3 {
     font-family: var(--serif); font-size: 1.4rem; margin-bottom: 1.2rem; color: var(--ink);
