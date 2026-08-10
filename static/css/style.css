@@ -75,10 +75,10 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,.06); }
 
 /* ── TEXTURA DE TELA (reutilizable) ───────────────────── */
-.hero, .section-dark, footer, .contact-hero {
+.hero, .section-dark, footer, .contact-hero, .contact-section {
     position: relative; overflow: hidden;
 }
-.hero::before, .section-dark::before, footer::before, .contact-hero::before {
+.hero::before, .section-dark::before, footer::before, .contact-hero::before, .contact-section::before {
     content: '';
     position: absolute; inset: 0;
     background-image:
@@ -87,7 +87,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
     background-size: 6px 6px;
     pointer-events: none;
 }
-.hero::after, .section-dark::after, footer::after, .contact-hero::after {
+.hero::after, .section-dark::after, footer::after, .contact-hero::after, .contact-section::after {
     content: '';
     position: absolute; inset: 0;
     opacity: .5;
