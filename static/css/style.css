@@ -288,7 +288,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 }
 
 .contact-section {
-    background: var(--cream);
+    background: #0d0d0d;
     padding: 0 5vw 7rem;
     position: relative;
 }
