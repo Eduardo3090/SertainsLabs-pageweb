@@ -14,7 +14,16 @@
 <section class="contact-section">
     <div class="contact-wrap">
         <div class="contact-card reveal">
-            <form action="{{ url_for('agendar') }}" method="POST">
+            <form action="https://formsubmit.co/sertainslabsinfo@gmail.com" method="POST">
+                <!-- Configuración de FormSubmit -->
+                <input type="hidden" name="_subject" value="Nuevo contacto desde SertainsLabs">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_next" value="https://sertainslabs-pageweb.onrender.com/gracias">
+
+                <!-- Protección anti-spam (honeypot) -->
+                <input type="text" name="_honey" style="display:none">
+
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label" for="nombre">Nombre completo *</label>
