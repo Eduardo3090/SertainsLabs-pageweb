@@ -8,20 +8,25 @@
 {% block content %}
 <!-- HERO -->
 <section class="hero">
-    <div class="hero-inner">
-        <p class="hero-eyebrow">Desarrollo web profesional</p>
-        <h1 class="hero-title">
-            Desarrollo web que convierte<br>visitas en clientes.
-        </h1>
-        <p class="hero-title-sub" style="color: var(--orange-light); font-style: italic; font-size: 1.4rem; margin-top: -0.5rem;">
-            Sitios diseñados para crecer contigo.
-        </p>
-        <p class="hero-sub">
-            Creamos sitios web para empresas, emprendimientos y tiendas online que no solo se ven bien — generan resultados.
-        </p>
-        <div class="hero-actions">
-            <a href="/contacto" class="btn-primary">Cotiza tu proyecto</a>
-            <a href="/servicios" class="btn-ghost">Ver servicios →</a>
+    <div class="hero-content">
+        <div class="hero-inner">
+            <p class="hero-eyebrow">Desarrollo web profesional</p>
+            <h1 class="hero-title">
+                Desarrollo web que convierte<br>visitas en clientes.
+            </h1>
+            <p class="hero-title-sub" style="margin-top: -0.5rem;">
+                Sitios diseñados para crecer contigo.
+            </p>
+            <p class="hero-sub">
+                Creamos sitios web para empresas, emprendimientos y tiendas online que no solo se ven bien — generan resultados.
+            </p>
+            <div class="hero-actions">
+                <a href="/contacto" class="btn-primary">Cotiza tu proyecto</a>
+                <a href="/servicios" class="btn-ghost">Ver servicios →</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="{{ url_for('static', filename='img/hero-illustration.jpg') }}" alt="Escritorio de desarrollo web con computador mostrando código, lámpara y taza de café" loading="eager">
         </div>
     </div>
 </section>
