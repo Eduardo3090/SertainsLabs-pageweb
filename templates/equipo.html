@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block title %}Nuestro Equipo | SertainsLabs SpA{% endblock %}
 {% block description %}Conoce a Felipe Pérez y Eduardo Salazar, el equipo fundador de SertainsLabs, dedicados a impulsar tu negocio online.{% endblock %}
+{% block canonical %}https://sertainslabs-pageweb.onrender.com/equipo{% endblock %}
 {% block og_title %}El equipo detrás de SertainsLabs{% endblock %}
-{% block canonical %}https://sertainslabs-pageweb.onrender.com/contacto{% endblock %}
-{% block og_url %}https://sertainslabs-pageweb.onrender.com/contacto{% endblock %}
 {% block og_description %}Dos personas, un solo objetivo: dedicación total a cada proyecto.{% endblock %}
+{% block og_url %}https://sertainslabs-pageweb.onrender.com/equipo{% endblock %}
 {% block content %}
 
 <!-- PAGE HERO -->
@@ -48,10 +48,10 @@
 
                 <!-- Info -->
                 <div style="padding: 1.8rem;">
-                    <h3 style="font-family: var(--serif); font-size: 1.5rem;
+                    <h2 style="font-family: var(--serif); font-size: 1.5rem;
                                margin-bottom: .8rem; color: var(--ink);">
                         {{ integrante.nombre }}
-                    </h3>
+                    </h2>
                     <ul style="list-style: none; padding: 0; margin: 0;">
                         {% for responsabilidad in integrante.responsabilidades %}
                         <li style="display: flex; align-items: center; gap: .6rem;
