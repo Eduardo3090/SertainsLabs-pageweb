@@ -121,10 +121,10 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
     pointer-events: none;
 }
 
-.section-light, .section-cta {
-    position: relative; overflow: hidden;
+.section-light, .section-cta, #mainNav {
+    position: relative;
 }
-.section-light::before, .section-cta::before {
+.section-light::before, .section-cta::before, #mainNav::before {
     content: '';
     position: absolute; inset: 0;
     background-image:
@@ -133,7 +133,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
     background-size: 6px 6px;
     pointer-events: none;
 }
-.section-light::after, .section-cta::after {
+.section-light::after, .section-cta::after, #mainNav::after {
     content: '';
     position: absolute; inset: 0;
     opacity: .3;
@@ -142,7 +142,10 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
     background-size: 100px 100px;
     pointer-events: none;
 }
-
+.nav-brand, .nav-links, .hamburger {
+    position: relative;
+    z-index: 1;
+}
 /* ── HERO ─────────────────────────────────────────────── */
 .hero {
     min-height: 100vh;
