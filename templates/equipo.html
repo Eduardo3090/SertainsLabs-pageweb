@@ -8,14 +8,14 @@
 {% block content %}
 
 <!-- PAGE HERO -->
-<div style="background: var(--ink); padding: 8rem 5vw 5rem; position: relative; overflow: hidden;">
+<div class="section-dark" style="padding: 8rem 5vw 5rem;">
     <div style="position: relative; z-index: 1;">
         <p class="eyebrow" style="color: var(--orange-light);">El equipo</p>
         <h1 style="font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem);
-                   color: #fff; line-height: 1.05; margin-bottom: 1rem;">
+                   color: var(--cream); line-height: 1.05; margin-bottom: 1rem;">
             Dos personas.<br><em style="color: var(--orange-light); font-style: italic;">Un solo objetivo.</em>
         </h1>
-        <p style="color: rgba(255,255,255,.55); font-size: 1.05rem; max-width: 45ch; line-height: 1.7;">
+        <p style="color: rgba(var(--cream-rgb),.55); font-size: 1.05rem; max-width: 45ch; line-height: 1.7;">
             Combinamos formación técnica actualizada con dedicación total a cada proyecto. 
             Trabajamos de cerca contigo, sin intermediarios ni letra chica.
         </p>
@@ -23,43 +23,20 @@
 </div>
 
 <!-- EQUIPO -->
-<section style="background: #FFF5EE; padding: 6rem 5vw;">
-    <div style="max-width: 1000px; margin: 0 auto;">
+<section class="section-light">
+    <div style="max-width: 1000px; margin: 0 auto; position: relative; z-index: 1;">
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem;">
             {% for integrante in integrantes %}
-            <div class="reveal" style="background: #fff; border-radius: 12px;
-                         border-top: 4px solid var(--orange);
-                         box-shadow: 0 4px 24px rgba(0,0,0,.07);
-                         overflow: hidden; transition: transform .3s, box-shadow .3s;"
-                 onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 36px rgba(0,0,0,.12)'"
-                 onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 24px rgba(0,0,0,.07)'">
-
-                <!-- Foto -->
-                <div style="height: 220px; background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
-                            display: flex; align-items: center; justify-content: center; position: relative;">
-                    <i class="fas fa-user" style="font-size: 5rem; color: rgba(242,100,25,.3);"></i>
-                    <span style="position: absolute; bottom: 12px; right: 12px;
-                                 background: var(--orange); color: #fff;
-                                 font-size: .72rem; font-weight: 700; letter-spacing: .1em;
-                                 text-transform: uppercase; padding: .3rem .8rem; border-radius: 3px;">
-                        {{ integrante.cargo }}
-                    </span>
+            <div class="reveal team-card">
+                <div class="team-card-photo">
+                    <i class="fas fa-user"></i>
+                    <span class="team-card-badge">{{ integrante.cargo }}</span>
                 </div>
-
-                <!-- Info -->
-                <div style="padding: 1.8rem;">
-                    <h2 style="font-family: var(--serif); font-size: 1.5rem;
-                               margin-bottom: .8rem; color: var(--ink);">
-                        {{ integrante.nombre }}
-                    </h2>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
+                <div class="team-card-body">
+                    <h2>{{ integrante.nombre }}</h2>
+                    <ul class="team-card-list">
                         {% for responsabilidad in integrante.responsabilidades %}
-                        <li style="display: flex; align-items: center; gap: .6rem;
-                                   padding: .4rem 0; border-bottom: 1px solid #f0ebe3;
-                                   font-size: .88rem; color: #555;">
-                            <span style="color: var(--orange); font-size: .7rem;">●</span>
-                            {{ responsabilidad }}
-                        </li>
+                        <li><span>●</span> {{ responsabilidad }}</li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -69,30 +46,13 @@
     </div>
 </section>
 
-<!-- FRASE CIERRE -->
-<section style="background: var(--orange); padding: 5rem 5vw; text-align: center;">
-    <div class="reveal" style="max-width: 650px; margin: 0 auto;">
-        <p style="font-size: .8rem; letter-spacing: .18em; text-transform: uppercase;
-                  font-weight: 700; color: rgba(0,0,0,.5); margin-bottom: 1rem;">
-            Nuestro compromiso
-        </p>
-        <h2 style="font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-                   color: var(--ink); line-height: 1.15; margin-bottom: 1.5rem;">
-            Le damos a tu proyecto<br>
-            <em>toda nuestra atención.</em>
-        </h2>
-        <p style="color: rgba(0,0,0,.6); font-size: 1rem; line-height: 1.7; margin-bottom: 2rem;">
-            Herramientas modernas, diseño con intención. Tu página no solo existe — destaca.
-        </p>
-        <a href="/contacto" style="background: var(--ink); color: #fff;
-                                   padding: .9rem 2.2rem; text-decoration: none;
-                                   font-weight: 700; letter-spacing: .04em;
-                                   border-radius: 4px; display: inline-block;
-                                   transition: opacity .2s;"
-           onmouseover="this.style.opacity='.8'"
-           onmouseout="this.style.opacity='1'">
-            Hablemos de tu proyecto →
-        </a>
+<!-- CTA CIERRE -->
+<section class="section-cta">
+    <div class="section-inner text-center">
+        <p class="eyebrow reveal">Nuestro compromiso</p>
+        <h2 class="section-title reveal">Le damos a tu proyecto<br><em>toda nuestra atención.</em></h2>
+        <p class="section-sub reveal">Herramientas modernas, diseño con intención. Tu página no solo existe — destaca.</p>
+        <a href="/contacto" class="btn-primary reveal">Hablemos de tu proyecto →</a>
     </div>
 </section>
 
