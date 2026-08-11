@@ -5,9 +5,9 @@
     --ink:          #111111;
     --mid:          #444444;
     --muted:        #888888;
-    --cream:        #FAF8F4;
-    --cream-rgb:    250, 248, 244;
-    --border:       #E8E3DB;
+    --cream:        #EDE2CC;
+    --cream-rgb:    237, 226, 204;
+    --border:       #D4C29C;
     --serif:        'Lora', Georgia, serif;
     --sans:         'Inter', system-ui, sans-serif;
     --ease:         cubic-bezier(.25,.8,.25,1);
