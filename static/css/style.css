@@ -6,7 +6,7 @@
     --mid:          #444444;
     --muted:        #888888;
     --cream:        #FAF8F4;
-    --white:        #F7EDDD;
+    --cream-rgb:    250, 248, 244;
     --border:       #E8E3DB;
     --serif:        'Lora', Georgia, serif;
     --sans:         'Inter', system-ui, sans-serif;
@@ -41,7 +41,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 .nav-links a:hover { color: var(--ink); }
 .nav-cta {
     background: var(--orange) !important;
-    color: #fff !important;
+    color: var(--cream) !important;
     padding: .5rem 1.3rem !important;
     border-radius: 4px;
     font-weight: 600 !important;
@@ -57,7 +57,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 /* ── BOTONES ─────────────────────────────────────────── */
 .btn-primary {
     display: inline-block;
-    background: var(--orange); color: #fff;
+    background: var(--orange); color: var(--cream);
     padding: .8rem 2rem; font-weight: 600; font-size: .95rem;
     text-decoration: none; border-radius: 4px;
     border: 2px solid var(--orange);
@@ -66,13 +66,13 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 .btn-primary:hover { background: var(--orange-light); border-color: var(--orange-light); }
 .btn-ghost {
     display: inline-block;
-    background: transparent; color: #fff;
+    background: transparent; color: var(--cream);
     padding: .8rem 1.5rem; font-weight: 500; font-size: .95rem;
     text-decoration: none; border-radius: 4px;
-    border: 2px solid rgba(255,255,255,.3);
+    border: 2px solid rgba(var(--cream-rgb),.3);
     transition: border-color .2s, background .2s;
 }
-.btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,.06); }
+.btn-ghost:hover { border-color: var(--cream); background: rgba(var(--cream-rgb),.06); }
 
 /* ── TEXTURA DE TELA (reutilizable) ───────────────────── */
 .hero, .section-dark, footer, .contact-hero {
@@ -148,9 +148,21 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
     min-height: 100vh;
     display: flex; align-items: center;
     padding: 8rem 5vw 6rem;
-    background: #0d0d0d;
+    background: var(--ink);
 }
-.hero-inner { position: relative; z-index: 1; max-width: 720px; }
+.hero-content {
+    position: relative; z-index: 1;
+    max-width: 1300px; margin: 0 auto; width: 100%;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 3rem;
+}
+.hero-inner { max-width: 640px; }
+.hero-image { flex-shrink: 0; max-width: 420px; width: 100%; }
+.hero-image img {
+    width: 100%; height: auto; display: block;
+    border-radius: 12px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.45);
+}
 .hero-eyebrow {
     font-size: .8rem; letter-spacing: .18em; text-transform: uppercase;
     color: var(--orange-light); font-weight: 600; margin-bottom: 1.2rem; display: block;
@@ -158,7 +170,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 .hero-title {
     font-family: var(--serif);
     font-size: clamp(3rem, 6vw, 5.5rem);
-    line-height: 1.05; color: #fff; margin-bottom: 1.5rem;
+    line-height: 1.05; color: var(--cream); margin-bottom: 1.5rem;
 }
 .hero-title em { color: var(--orange-light); font-style: italic; }
 .hero-title-sub {
@@ -171,13 +183,20 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 }
 .hero-sub {
     font-size: 1.1rem; line-height: 1.7;
-    color: rgba(255,255,255,.6); max-width: 50ch; margin-bottom: 2.5rem;
+    color: rgba(var(--cream-rgb),.6); max-width: 50ch; margin-bottom: 2.5rem;
 }
 .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
+@media (max-width: 900px) {
+    .hero-content { flex-direction: column; text-align: center; }
+    .hero-inner { max-width: 100%; }
+    .hero-image { max-width: 320px; margin: 0 auto; }
+    .hero-actions { justify-content: center; }
+}
+
 /* ── SECCIONES ────────────────────────────────────────── */
 .section-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
-.section-light { background: var(--white); padding: 7rem 5vw; }
+.section-light { background: var(--cream); padding: 7rem 5vw; }
 .section-dark  { background: var(--ink);   padding: 7rem 5vw; }
 .section-cta   { background: var(--cream); padding: 7rem 5vw; text-align: center; }
 .text-center   { text-align: center; }
@@ -247,10 +266,10 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 }
 .service-card:hover .service-card-icon {
     background: var(--orange);
-    color: #fff;
+    color: var(--cream);
     transform: scale(1.06) rotate(-4deg);
 }
-.service-card h3 {
+.service-card h2 {
     font-family: var(--serif);
     font-size: 1.3rem;
     margin-bottom: .7rem;
@@ -290,12 +309,12 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 .feature i {
     font-size: 1.4rem; color: var(--orange); margin-bottom: .8rem; display: block;
 }
-.feature h4 { font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: .4rem; }
-.feature p  { font-size: .85rem; color: rgba(255,255,255,.45); line-height: 1.65; }
+.feature h3 { font-size: 1rem; font-weight: 600; color: var(--cream); margin-bottom: .4rem; }
+.feature p  { font-size: .85rem; color: rgba(var(--cream-rgb),.45); line-height: 1.65; }
 
 /* ── CONTACTO / FORMULARIO ────────────────────────────── */
 .contact-hero {
-    background: #0d0d0d;
+    background: var(--ink);
     padding: 8rem 5vw 6rem;
     position: relative; overflow: hidden;
 }
@@ -304,15 +323,15 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 .contact-hero h1 {
     font-family: var(--serif);
     font-size: clamp(2.2rem, 4.5vw, 3.4rem);
-    color: #fff; line-height: 1.1; margin-bottom: 1rem;
+    color: var(--cream); line-height: 1.1; margin-bottom: 1rem;
 }
 .contact-hero h1 em { color: var(--orange-light); font-style: italic; }
 .contact-hero p {
-    color: rgba(255,255,255,.6); font-size: 1.05rem; line-height: 1.6;
+    color: rgba(var(--cream-rgb),.6); font-size: 1.05rem; line-height: 1.6;
 }
 
 .contact-section {
-    background: #0d0d0d;
+    background: var(--ink);
     padding: 0 5vw 7rem;
     position: relative;
 }
@@ -359,7 +378,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
     color: var(--ink); transition: border-color .2s, background .2s;
 }
 .form-input:focus, .form-select:focus, .form-textarea:focus {
-    outline: none; border-color: var(--orange); background: #fff;
+    outline: none; border-color: var(--orange); background: var(--cream);
 }
 .form-textarea { resize: vertical; min-height: 100px; }
 
@@ -370,7 +389,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 
 .form-submit {
     width: 100%; display: flex; align-items: center; justify-content: center; gap: .6rem;
-    background: var(--orange); color: #fff; border: none; border-radius: 6px;
+    background: var(--orange); color: var(--cream); border: none; border-radius: 6px;
     padding: .95rem; font-size: 1rem; font-weight: 700; cursor: pointer;
     transition: background .2s, transform .2s;
 }
@@ -405,7 +424,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
         repeating-linear-gradient(-45deg, rgba(0,0,0,.015) 0px, rgba(0,0,0,.015) 1px, transparent 1px, transparent 4px);
     background-size: 6px 6px;
 }
-.modal-box h3 {
+.modal-box h2 {
     font-family: var(--serif); font-size: 1.4rem; margin-bottom: 1.2rem; color: var(--ink);
 }
 .modal-box p { font-size: .88rem; color: var(--mid); line-height: 1.65; margin-bottom: .9rem; }
@@ -424,6 +443,39 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
+/* ── EQUIPO ───────────────────────────────────────────── */
+.team-card {
+    background: var(--cream); border-radius: 12px;
+    border-top: 4px solid var(--orange);
+    box-shadow: 0 4px 24px rgba(0,0,0,.07);
+    overflow: hidden; transition: transform .3s, box-shadow .3s;
+}
+.team-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(0,0,0,.12); }
+.team-card-photo {
+    height: 220px;
+    background: linear-gradient(135deg, var(--ink), #2a2a2a);
+    display: flex; align-items: center; justify-content: center; position: relative;
+}
+.team-card-photo i { font-size: 5rem; color: rgba(242,100,25,.3); }
+.team-card-badge {
+    position: absolute; bottom: 12px; right: 12px;
+    background: var(--orange); color: var(--cream);
+    font-size: .72rem; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; padding: .3rem .8rem; border-radius: 3px;
+}
+.team-card-body { padding: 1.8rem; }
+.team-card-body h2 {
+    font-family: var(--serif); font-size: 1.5rem;
+    margin-bottom: .8rem; color: var(--ink);
+}
+.team-card-list { list-style: none; padding: 0; margin: 0; }
+.team-card-list li {
+    display: flex; align-items: center; gap: .6rem;
+    padding: .4rem 0; border-bottom: 1px solid var(--border);
+    font-size: .88rem; color: var(--mid);
+}
+.team-card-list li span { color: var(--orange); font-size: .7rem; }
+
 /* ── FOOTER ───────────────────────────────────────────── */
 footer {
     background: var(--ink); padding: 3.5rem 5vw 1.5rem;
@@ -433,12 +485,12 @@ footer {
     gap: 2rem; flex-wrap: wrap; margin-bottom: 2.5rem;
     position: relative; z-index: 1;
 }
-.footer-brand p { font-size: .85rem; color: rgba(255,255,255,.4); margin-top: .6rem; max-width: 28ch; }
+.footer-brand p { font-size: .85rem; color: rgba(var(--cream-rgb),.4); margin-top: .6rem; max-width: 28ch; }
 .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; }
-.footer-links a { font-size: .85rem; color: rgba(255,255,255,.45); text-decoration: none; transition: color .2s; }
-.footer-links a:hover { color: #fff; }
-.footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem; position: relative; z-index: 1; }
-.footer-bottom p { font-size: .78rem; color: rgba(255,255,255,.25); }
+.footer-links a { font-size: .85rem; color: rgba(var(--cream-rgb),.45); text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: var(--cream); }
+.footer-bottom { border-top: 1px solid rgba(var(--cream-rgb),.08); padding-top: 1.5rem; position: relative; z-index: 1; }
+.footer-bottom p { font-size: .78rem; color: rgba(var(--cream-rgb),.25); }
 
 /* ── RESPONSIVE ───────────────────────────────────────── */
 @media (max-width: 768px) {
