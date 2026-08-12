@@ -117,3 +117,25 @@ def gracias():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+@app.route('/portafolio')
+def portafolio():
+    proyectos = [
+        {
+            'nombre': 'Megadiseños',
+            'descripcion': 'Sitio corporativo para imprenta en Copiapó, con catálogo de productos, cotizador integrado y SEO local orientado a "imprenta en Copiapó".',
+            'tags': ['Flask', 'SEO local', 'WhatsApp API'],
+            'imagen': 'https://megadise-os.onrender.com/static/proyecto-gigantografia-estatal.jpg',
+            'es_logo': False,
+            'url': 'https://megadise-os.onrender.com/'
+        },
+        {
+            'nombre': 'M&J Consultores Estratégicos',
+            'descripcion': 'Sitio institucional para consultora de prevención de riesgos, administración y logística, con captación de leads y roadmap de nuevas funciones.',
+            'tags': ['Flask', 'Landing institucional', 'Captación de leads'],
+            'imagen': 'https://mjy-consultores.onrender.com/static/logo.png',
+            'es_logo': True,
+            'url': 'https://mjy-consultores.onrender.com/'
+        }
+    ]
+    return render_template('portafolio.html', proyectos=proyectos)
