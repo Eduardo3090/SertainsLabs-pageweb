@@ -133,7 +133,7 @@ def portafolio():
             'nombre': 'M&J Consultores Estratégicos',
             'descripcion': 'Sitio institucional para consultora de prevención de riesgos, administración y logística, con captación de leads y roadmap de nuevas funciones.',
             'tags': ['Flask', 'Landing institucional', 'Captación de leads'],
-            'imagen': 'https://mjy-consultores.onrender.com/static/logo.png',
+            'imagen': url_for('static', filename='img/logo-m&jconsultores.png'),
             'es_logo': True,
             'url': 'https://mjy-consultores.onrender.com/'
         }
