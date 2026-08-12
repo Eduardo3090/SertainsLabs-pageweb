@@ -569,3 +569,37 @@ footer {
     padding-bottom: .1rem; transition: color .2s;
 }
 .portfolio-card-link:hover { color: var(--orange); }
+
+/* ── REDES SOCIALES ───────────────────────────────────── */
+
+/* En el footer */
+.footer-social {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1.2rem;
+}
+.footer-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(var(--cream-rgb), 0.06);
+    color: rgba(var(--cream-rgb), 0.4);
+    border: 1px solid rgba(var(--cream-rgb), 0.06);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.25s var(--ease);
+}
+.footer-social a:hover {
+    transform: translateY(-2px);
+    color: var(--cream);
+    background: rgba(var(--cream-rgb), 0.12);
+}
+.footer-social a:hover .fa-instagram {
+    color: #E4405F;
+}
+.footer-social a:hover .fa-envelope {
+    color: var(--orange-light);
+}
