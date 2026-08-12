@@ -603,3 +603,390 @@ footer {
 .footer-social a:hover .fa-envelope {
     color: var(--orange-light);
 }
+
+/* ── GRACIAS / THANKS PAGE ───────────────────────────── */
+
+/* Hero de agradecimiento */
+.thanks-hero {
+    background: var(--ink);
+    padding: 10rem 5vw 6rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.thanks-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        repeating-linear-gradient(45deg, rgba(255,255,255,.025) 0px, rgba(255,255,255,.025) 1px, transparent 1px, transparent 4px),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,.02) 0px, rgba(255,255,255,.02) 1px, transparent 1px, transparent 4px);
+    background-size: 6px 6px;
+    pointer-events: none;
+}
+.thanks-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Icono de check - MÁS GRANDE Y MEJOR */
+.thanks-icon-wrapper {
+    display: inline-block;
+    margin-bottom: 2rem;
+    position: relative;
+}
+.thanks-icon-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(242, 100, 25, 0.15) 0%, transparent 70%);
+    animation: pulse-icon 2s ease-in-out infinite;
+}
+@keyframes pulse-icon {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.7; }
+}
+.thanks-icon {
+    display: inline-flex;
+    width: 100px;
+    height: 100px;
+    background: rgba(242, 100, 25, 0.12);
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid rgba(242, 100, 25, 0.3);
+    position: relative;
+    box-shadow: 0 0 60px rgba(242, 100, 25, 0.1);
+}
+.thanks-icon i {
+    font-size: 3.8rem;
+    color: var(--orange-light);
+    filter: drop-shadow(0 4px 20px rgba(242, 100, 25, 0.2));
+}
+.thanks-hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+}
+.thanks-hero h1 em {
+    color: var(--orange-light);
+    font-style: italic;
+}
+.thanks-sub {
+    font-size: 1.1rem;
+    color: rgba(var(--cream-rgb), 0.6);
+    line-height: 1.8;
+    max-width: 50ch;
+    margin: 0 auto;
+}
+.thanks-sub strong {
+    color: var(--cream);
+    font-weight: 600;
+}
+
+/* Steps - MEJORADOS */
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+.step-card {
+    text-align: center;
+    padding: 2.5rem 2rem;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: all 0.4s var(--ease);
+    position: relative;
+    overflow: hidden;
+}
+.step-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--orange);
+    transform: scaleX(0);
+    transition: transform 0.4s var(--ease);
+}
+.step-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+    border-color: var(--orange-light);
+}
+.step-card:hover::before {
+    transform: scaleX(1);
+}
+.step-number-wrapper {
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+.step-number {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--orange);
+    background: rgba(242, 100, 25, 0.1);
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    border: 1px solid rgba(242, 100, 25, 0.15);
+}
+.step-icon-wrapper {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    background: rgba(242, 100, 25, 0.08);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    transition: all 0.3s var(--ease);
+}
+.step-card:hover .step-icon-wrapper {
+    background: var(--orange);
+    transform: scale(1.05) rotate(-4deg);
+}
+.step-icon {
+    font-size: 1.8rem;
+    color: var(--orange);
+    transition: color 0.3s var(--ease);
+}
+.step-card:hover .step-icon {
+    color: var(--cream);
+}
+.step-card h3 {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+}
+.step-card p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+
+/* Contact Grid en Thanks */
+.thanks-contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+.thanks-contact-info {
+    padding-right: 1rem;
+}
+.thanks-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.thanks-contact-item i {
+    font-size: 1.2rem;
+    color: var(--orange-light);
+    margin-top: 0.2rem;
+    width: 24px;
+    flex-shrink: 0;
+}
+.thanks-contact-item div {
+    display: flex;
+    flex-direction: column;
+}
+.thanks-contact-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(var(--cream-rgb), 0.35);
+    font-weight: 600;
+}
+.thanks-contact-item a,
+.thanks-contact-item span {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+.thanks-contact-item a:hover {
+    color: var(--orange-light);
+}
+
+/* Redes Sociales en Thanks */
+.thanks-social {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(var(--cream-rgb), 0.08);
+}
+.thanks-social-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(var(--cream-rgb), 0.35);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: block;
+}
+.thanks-social-icons {
+    display: flex;
+    gap: 1rem;
+}
+.social-btn {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    background: rgba(var(--cream-rgb), 0.06);
+    color: rgba(var(--cream-rgb), 0.6);
+    border: 1px solid rgba(var(--cream-rgb), 0.08);
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s var(--ease);
+    position: relative;
+}
+.social-btn i {
+    font-size: 1.4rem;
+    transition: transform 0.3s var(--ease);
+}
+.social-btn .social-tooltip {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: all 0.3s var(--ease);
+}
+.social-btn:hover .social-tooltip {
+    opacity: 1;
+    transform: translateY(0);
+}
+.social-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}
+.social-btn:hover i {
+    transform: scale(1.1);
+}
+/* Instagram hover */
+.social-btn.instagram:hover {
+    background: linear-gradient(135deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+    border-color: #E1306C;
+    color: #fff;
+}
+/* Gmail hover */
+.social-btn.email:hover {
+    background: linear-gradient(135deg, #D44638, #B23121);
+    border-color: #D44638;
+    color: #fff;
+}
+
+/* Acciones - BOTONES MEJORADOS */
+.thanks-actions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+}
+.thanks-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s var(--ease);
+    position: relative;
+    overflow: hidden;
+}
+.thanks-action-btn i {
+    font-size: 1rem;
+    transition: transform 0.3s var(--ease);
+}
+.thanks-action-btn:hover i {
+    transform: translateX(4px);
+}
+.thanks-action-btn.primary {
+    background: var(--orange);
+    color: var(--cream);
+    grid-column: 1 / -1;
+    box-shadow: 0 4px 20px rgba(242, 100, 25, 0.3);
+}
+.thanks-action-btn.primary:hover {
+    background: var(--orange-light);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(242, 100, 25, 0.4);
+}
+.thanks-action-btn.secondary {
+    background: rgba(var(--cream-rgb), 0.06);
+    color: rgba(var(--cream-rgb), 0.7);
+    border: 1.5px solid rgba(var(--cream-rgb), 0.08);
+}
+.thanks-action-btn.secondary:hover {
+    background: rgba(var(--cream-rgb), 0.12);
+    color: var(--cream);
+    transform: translateY(-3px);
+    border-color: var(--orange-light);
+}
+
+/* Trust section */
+.thanks-trust {
+    padding: 1rem 0;
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────── */
+@media (max-width: 900px) {
+    .steps-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (max-width: 768px) {
+    .thanks-hero {
+        padding: 8rem 5vw 4rem;
+    }
+    .thanks-icon {
+        width: 80px;
+        height: 80px;
+    }
+    .thanks-icon i {
+        font-size: 3rem;
+    }
+    .steps-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .thanks-contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+    .thanks-contact-info {
+        padding-right: 0;
+    }
+    .thanks-actions-grid {
+        grid-template-columns: 1fr;
+    }
+    .thanks-action-btn.primary {
+        grid-column: 1;
+    }
+    .thanks-social-icons {
+        flex-wrap: wrap;
+    }
+    .social-btn {
+        flex: 1;
+        min-width: 120px;
+        justify-content: center;
+    }
+}
