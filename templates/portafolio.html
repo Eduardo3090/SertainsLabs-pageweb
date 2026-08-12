@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Portafolio | Proyectos Web de SertainsLabs{% endblock %}
+{% block description %}Conoce los sitios web que hemos desarrollado para empresas reales: Megadiseños y M&J Consultores. Resultados que puedes visitar hoy mismo.{% endblock %}
+{% block canonical %}https://sertainslabs-pageweb.onrender.com/portafolio{% endblock %}
+{% block og_title %}Portafolio de SertainsLabs{% endblock %}
+{% block og_description %}Proyectos reales, sitios en producción. Conoce nuestro trabajo.{% endblock %}
+{% block og_url %}https://sertainslabs-pageweb.onrender.com/portafolio{% endblock %}
+{% block content %}
+
+<div class="section-dark" style="padding: 8rem 5vw 5rem; text-align:center;">
+    <p class="eyebrow" style="color: var(--orange-light);">Nuestro trabajo</p>
+    <h1 style="font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.2rem); color: var(--cream); line-height:1.1; margin-bottom:1rem;">
+        Proyectos reales,<br><em style="color: var(--orange-light); font-style: italic;">resultados reales.</em>
+    </h1>
+    <p style="color: rgba(var(--cream-rgb),.55); font-size: 1.05rem; max-width: 55ch; margin: 0 auto; line-height:1.7;">
+        Cada sitio que construimos está en producción, atendiendo clientes reales. Visítalos tú mismo.
+    </p>
+</div>
+
+<section class="section-light">
+    <div class="section-inner">
+        <div class="portfolio-grid">
+            {% for proyecto in proyectos %}
+            <div class="portfolio-card reveal">
+                <div class="portfolio-card-image{% if proyecto.es_logo %} is-logo{% endif %}">
+                    <img src="{{ proyecto.imagen }}" alt="{{ proyecto.nombre }}">
+                </div>
+                <div class="portfolio-card-body">
+                    <h2>{{ proyecto.nombre }}</h2>
+                    <p>{{ proyecto.descripcion }}</p>
+                    <div class="portfolio-tags">
+                        {% for tag in proyecto.tags %}
+                        <span class="portfolio-tag">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                    <a href="{{ proyecto.url }}" target="_blank" rel="noopener noreferrer" class="portfolio-card-link">
+                        Visitar sitio <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section-cta">
+    <div class="section-inner text-center">
+        <p class="eyebrow reveal">¿Tu proyecto es el siguiente?</p>
+        <h2 class="section-title reveal">Construyamos <em>tu sitio web</em></h2>
+        <p class="section-sub reveal">Cuéntanos qué necesitas y te mostramos cómo lo haríamos.</p>
+        <a href="/contacto" class="btn-primary reveal">Cotiza tu proyecto</a>
+    </div>
+</section>
+
+{% endblock %}
