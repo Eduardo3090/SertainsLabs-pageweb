@@ -1,40 +1,146 @@
 {% extends "base.html" %}
-{% block title %}Gracias por tu mensaje | SertainsLabs SpA{% endblock %}
-{% block description %}Hemos recibido tu solicitud. Un miembro de SertainsLabs se pondrá en contacto contigo pronto.{% endblock %}
+{% block title %}¡Gracias! | SertainsLabs SpA{% endblock %}
+{% block description %}Hemos recibido tu mensaje. Te contactaremos en menos de 24 horas para agendar tu reunión.{% endblock %}
 {% block robots %}noindex, follow{% endblock %}
+{% block og_title %}¡Gracias por contactarnos! | SertainsLabs{% endblock %}
+{% block og_description %}Tu mensaje ha sido enviado exitosamente. Pronto nos pondremos en contacto contigo.{% endblock %}
+
 {% block content %}
-<div class="container my-5">
-    <div class="row">
-        <div class="col-lg-8 mx-auto text-center">
-            <div class="thank-you-section">
-                <i class="fas fa-check-circle thank-you-icon"></i>
-                <h1 class="mb-3 fade-in-up">¡Mensaje enviado con éxito!</h1>
-                <p class="lead mb-4 reveal">
-                    Gracias por contactarte con <strong>SertainsLabs SpA</strong>.
+
+<section class="thanks-hero">
+    <div class="thanks-hero-inner reveal">
+        <div class="thanks-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <p class="eyebrow" style="color: var(--orange-light);">¡Mensaje enviado!</p>
+        <h1>Gracias por <em>contactarnos</em></h1>
+        <p class="thanks-sub">
+            Hemos recibido tu solicitud. Un miembro de nuestro equipo se pondrá en contacto contigo 
+            <strong>en menos de 24 horas hábiles</strong> para coordinar una reunión.
+        </p>
+    </div>
+</section>
+
+
+<section class="section-light">
+    <div class="section-inner">
+        <div class="steps-grid">
+            <div class="step-card reveal">
+                <span class="step-number">01</span>
+                <i class="fas fa-envelope-open-text step-icon"></i>
+                <h3>Revisamos tu mensaje</h3>
+                <p>Leemos tu solicitud y analizamos cómo podemos ayudarte.</p>
+            </div>
+            <div class="step-card reveal">
+                <span class="step-number">02</span>
+                <i class="fas fa-calendar-check step-icon"></i>
+                <h3>Agendamos reunión</h3>
+                <p>Te contactamos para coordinar una reunión de diagnóstico sin costo.</p>
+            </div>
+            <div class="step-card reveal">
+                <span class="step-number">03</span>
+                <i class="fas fa-rocket step-icon"></i>
+                <h3>Empezamos tu proyecto</h3>
+                <p>Definimos objetivos, plazos y comenzamos a trabajar en tu solución.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section-dark">
+    <div class="section-inner">
+        <div class="thanks-contact-grid">
+
+            <div class="thanks-contact-info reveal">
+                <p class="eyebrow" style="color: var(--orange-light);">¿Necesitas hablar ya?</p>
+                <h2 style="font-family: var(--serif); color: var(--cream); font-size: clamp(1.8rem, 3vw, 2.6rem); margin-bottom: 1.5rem;">
+                    Estamos <em style="color: var(--orange-light);">aquí para ti</em>
+                </h2>
+                <p style="color: rgba(var(--cream-rgb), 0.6); margin-bottom: 2rem; line-height: 1.7;">
+                    Si prefieres contactarnos directamente o tienes alguna duda urgente, 
+                    aquí tienes nuestros datos.
                 </p>
-                <p class="mb-4 reveal delay-1">
-                    Hemos recibido tu consulta y te responderemos a la brevedad 
-                    (máximo 24 horas hábiles).
-                </p>
-                <div class="card bg-light mb-4 reveal delay-2">
-                    <div class="card-body">
-                        <h2 class="card-title">¿Qué sigue?</h2>
-                        <p class="card-text mb-0">
-                            Uno de nuestros especialistas revisará tu proyecto y te contactará 
-                            para agendar una reunión de diagnóstico sin costo.
-                        </p>
+                <div class="thanks-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <span class="thanks-contact-label">Correo electrónico</span>
+                        <a href="mailto:contacto@sertainslabs.cl">sertainslabsinfo@gmail.com</a>
                     </div>
                 </div>
-                <div class="mt-4 reveal delay-3">
-                    <a href="/" class="btn btn-primary">
-                        <i class="fas fa-home"></i> Volver al inicio
+                <div class="thanks-contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <span class="thanks-contact-label">Teléfono</span>
+                        <a href="tel:+56212345678">+56 9 7258 3812</a>
+                    </div>
+                </div>
+                <div class="thanks-contact-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <span class="thanks-contact-label">Horario de atención</span>
+                        <span>Lunes a Viernes, 9:00 - 18:00 hrs</span>
+                    </div>
+                </div>
+
+                <!-- REDES SOCIALES -->
+                <div class="thanks-social">
+                    <p class="thanks-social-label">Síguenos en redes</p>
+                    <div class="thanks-social-icons">
+                        <a href="https://www.instagram.com/sertainslabs/" target="_blank" rel="noopener noreferrer" class="social-btn instagram" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="mailto:sertainslabsinfo@gmail.com" class="social-btn email" aria-label="Correo electrónico">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="thanks-actions reveal">
+                <h3 style="font-family: var(--serif); color: var(--cream); font-size: 1.4rem; margin-bottom: 1.5rem;">
+                    ¿Qué te gustaría hacer ahora?
+                </h3>
+                <div class="thanks-actions-grid">
+                    <a href="/" class="thanks-action-btn primary">
+                        <i class="fas fa-home"></i>
+                        <span>Volver al inicio</span>
                     </a>
-                    <a href="/servicios" class="btn btn-outline-primary ms-2">
-                        <i class="fas fa-eye"></i> Ver servicios
+                    <a href="/servicios" class="thanks-action-btn secondary">
+                        <i class="fas fa-eye"></i>
+                        <span>Ver servicios</span>
+                    </a>
+                    <a href="/portafolio" class="thanks-action-btn secondary">
+                        <i class="fas fa-folder-open"></i>
+                        <span>Ver portafolio</span>
+                    </a>
+                    <a href="/equipo" class="thanks-action-btn secondary">
+                        <i class="fas fa-users"></i>
+                        <span>Conocer al equipo</span>
                     </a>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
+
+<!-- TESTIMONIO O CONFIANZA (Opcional) -->
+<section class="section-light" style="padding: 4rem 5vw; text-align: center;">
+    <div class="section-inner">
+        <div class="thanks-trust reveal">
+            <p style="font-size: 0.9rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem;">
+                Confianza y transparencia
+            </p>
+            <p style="font-family: var(--serif); font-size: clamp(1.2rem, 2vw, 1.6rem); color: var(--ink); max-width: 50ch; margin: 0 auto; line-height: 1.6;">
+                "Trabajamos con <strong style="color: var(--orange);">compromiso y seriedad</strong> 
+                para que tu proyecto sea un éxito desde el primer día."
+            </p>
+            <p style="color: var(--muted); margin-top: 0.75rem; font-size: 0.9rem;">
+                — Equipo SertainsLabs
+            </p>
+        </div>
+    </div>
+</section>
+
 {% endblock %}
