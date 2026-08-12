@@ -541,9 +541,10 @@ footer {
 .portfolio-card-image.is-logo {
     background: var(--ink);
     display: flex; align-items: center; justify-content: center;
+    padding: 1.5rem;
 }
 .portfolio-card-image.is-logo img {
-    width: auto; height: 64px; object-fit: contain;
+    width: auto; height: 120px; max-width: 80%; object-fit: contain;
 }
 .portfolio-card-body { padding: 1.8rem 2rem; }
 .portfolio-card-body h2 {
