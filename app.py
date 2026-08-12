@@ -125,8 +125,8 @@ def portafolio():
             'nombre': 'Megadiseños',
             'descripcion': 'Sitio corporativo para imprenta en Copiapó, con catálogo de productos, cotizador integrado y SEO local orientado a "imprenta en Copiapó".',
             'tags': ['Flask', 'SEO local', 'WhatsApp API'],
-            'imagen': 'https://megadise-os.onrender.com/static/proyecto-gigantografia-estatal.jpg',
-            'es_logo': False,
+            'imagen': url_for('static', filename='img/logo-megadisenos.png'),
+            'es_logo': True,
             'url': 'https://megadise-os.onrender.com/'
         },
         {
