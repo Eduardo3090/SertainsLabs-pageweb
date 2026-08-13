@@ -990,3 +990,28 @@ footer {
         justify-content: center;
     }
 }
+
+/* ── RESPONSIVE EQUIPO ────────────────────────────────── */
+@media (max-width: 768px) {
+    /* Equipo - Una columna en móvil */
+    .section-light .section-inner > div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+    .team-card {
+        max-width: 100%;
+    }
+    .team-card-photo {
+        height: 200px;
+    }
+    .team-card-body {
+        padding: 1.5rem;
+    }
+    .team-card-body h2 {
+        font-size: 1.3rem;
+    }
+    .team-card-list li {
+        font-size: 0.85rem;
+        padding: 0.5rem 0;
+    }
+}
