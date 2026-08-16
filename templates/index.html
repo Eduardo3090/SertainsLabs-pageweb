@@ -25,9 +25,91 @@
                 <a href="/servicios" class="btn-ghost">Ver servicios →</a>
             </div>
         </div>
-        <div class="hero-image">
-            <img src="{{ url_for('static', filename='img/hero-illustration.jpg') }}" alt="Escritorio de desarrollo web con computador mostrando código, lámpara y taza de café" loading="eager">
+        <div class="hero-image hero-mockup-wrap">
+    <div class="hero-mockup">
+        <div class="hero-mockup-bar">
+            <span class="hm-dot hm-red"></span><span class="hm-dot hm-yellow"></span><span class="hm-dot hm-green"></span>
+            <span class="hm-url">sertainslabs.cl</span>
         </div>
+        <div class="hero-mockup-body">
+            <div class="hm-row">
+                <div class="hm-avatar"></div>
+                <div class="hm-lines">
+                    <div class="hm-line hm-l1"></div>
+                    <div class="hm-line hm-l2"></div>
+                </div>
+            </div>
+            <div class="hm-cards3">
+                <div class="hm-card"></div>
+                <div class="hm-card"></div>
+                <div class="hm-card hm-accent"></div>
+            </div>
+            <div class="hm-lines2">
+                <div class="hm-line2 hm-w1"></div>
+                <div class="hm-line2 hm-w2"></div>
+                <div class="hm-line2 hm-w3"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hm-float hm-metric-1">
+        <div class="hm-icon">%</div>
+        <div><div class="hm-num">+150%</div><div class="hm-label">conversión</div></div>
+    </div>
+
+    <div class="hm-float hm-metric-2">
+        <div class="hm-num">20+</div>
+        <div class="hm-label">proyectos entregados</div>
+    </div>
+</div>
+
+<style>
+  @keyframes hmFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+  .hero-mockup-wrap{position:relative;padding:30px 20px;}
+  .hero-mockup{position:relative;border-radius:12px;
+    background:var(--ink2, #241D17);
+    border:1px solid var(--border, #3A3226);
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.6);
+    animation:hmFloat 6s ease-in-out infinite;}
+  .hero-mockup-bar{display:flex;align-items:center;gap:7px;padding:14px 16px;
+    border-bottom:1px solid var(--border, #3A3226);}
+  .hm-dot{width:11px;height:11px;border-radius:50%;}
+  .hm-dot.hm-red{background:#E8615A;} .hm-dot.hm-yellow{background:#E8B85A;} .hm-dot.hm-green{background:#6FBF7A;}
+  .hm-url{flex:1;text-align:center;color:#7D7466;font-size:12px;font-family:monospace;}
+  .hero-mockup-body{padding:26px;display:flex;flex-direction:column;gap:12px;}
+  .hm-row{display:flex;gap:12px;align-items:center;}
+  .hm-avatar{width:36px;height:36px;border-radius:8px;
+    background:linear-gradient(135deg, var(--orange, #F26419), var(--orange-light, #F58A50));}
+  .hm-lines{flex:1;display:flex;flex-direction:column;gap:6px;}
+  .hm-line{height:9px;border-radius:4px;}
+  .hm-line.hm-l1{width:70%;background:var(--border, #3A3226);}
+  .hm-line.hm-l2{width:45%;background:var(--ink3, #2C261E);}
+  .hm-cards3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:6px;}
+  .hm-card{height:64px;border-radius:8px;background:var(--ink3, #2C261E);border:1px solid var(--border, #3A3226);}
+  .hm-card.hm-accent{background:linear-gradient(135deg, rgba(242,100,25,.2), rgba(242,100,25,.07));
+    border:1px solid rgba(242,100,25,.35);}
+  .hm-lines2{display:flex;flex-direction:column;gap:8px;margin-top:8px;}
+  .hm-line2{height:8px;border-radius:4px;background:var(--ink3, #2C261E);}
+  .hm-line2.hm-w1{width:90%;} .hm-line2.hm-w2{width:80%;} .hm-line2.hm-w3{width:60%;}
+
+  .hm-float{position:absolute;box-shadow:0 16px 30px -10px rgba(0,0,0,.5);border-radius:10px;
+    animation:hmFloat 5s ease-in-out infinite .4s;}
+  .hm-float.hm-metric-1{left:-16px;bottom:36px;background:var(--cream, #EDE2CC);
+    padding:14px 18px;display:flex;align-items:center;gap:10px;}
+  .hm-metric-1 .hm-icon{width:34px;height:34px;border-radius:8px;background:var(--orange, #F26419);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px;}
+  .hm-metric-1 .hm-num{font-weight:800;font-size:16px;color:var(--ink, #1C1712);}
+  .hm-metric-1 .hm-label{font-size:11px;color:#8A7F6E;}
+  .hm-float.hm-metric-2{right:-10px;top:-20px;background:var(--ink2, #241D17);
+    border:1px solid var(--border, #3A3226);padding:12px 16px;animation-delay:.8s;}
+  .hm-metric-2 .hm-num{font-weight:800;font-size:16px;color:var(--cream, #EDE2CC);}
+  .hm-metric-2 .hm-label{font-size:11px;color:#8A7F6E;}
+
+  @media (max-width:900px){
+    .hm-float.hm-metric-1{left:0;bottom:16px;}
+    .hm-float.hm-metric-2{right:0;top:-14px;}
+  }
+</style>
     </div>
 </section>
 <!-- SERVICIOS -->
