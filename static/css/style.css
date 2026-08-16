@@ -146,6 +146,11 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
     position: relative;
     z-index: 1;
 }
+
+.nav-brand img {
+    filter: drop-shadow(0 2px 5px rgba(17, 17, 17, .3));
+    transition: filter .2s ease;
+}
 /* ── HERO ─────────────────────────────────────────────── */
 .hero {
     min-height: 100vh;
