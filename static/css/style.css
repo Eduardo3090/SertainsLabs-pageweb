@@ -21,7 +21,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 #mainNav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 900;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 1rem 5vw;
+    padding: 1.2rem 5vw;
     background: var(--cream);
     border-bottom: 1px solid transparent;
     transition: border-color .3s, box-shadow .3s;
@@ -31,10 +31,10 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
     box-shadow: 0 2px 16px rgba(0,0,0,.06);
 }
 .nav-links {
-    display: flex; gap: 2rem; list-style: none; align-items: center;
+    display: flex; gap: 2.4rem; list-style: none; align-items: center;
 }
 .nav-links a {
-    font-size: .9rem; font-weight: 500; color: var(--mid);
+    font-size: 1.05rem; font-weight: 500; color: var(--mid);
     text-decoration: none; letter-spacing: .01em;
     transition: color .2s;
 }
@@ -42,7 +42,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 .nav-cta {
     background: var(--orange) !important;
     color: var(--cream) !important;
-    padding: .5rem 1.3rem !important;
+    padding: .75rem 1.7rem !important;
     border-radius: 4px;
     font-weight: 600 !important;
     transition: background .2s !important;
