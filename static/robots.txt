@@ -3,4 +3,4 @@ Allow: /
 Disallow: /gracias
 Disallow: /agendar
 
-Sitemap: https://sertainslabs-pageweb.onrender.com/sitemap.xml
+Sitemap: https://www.sertainslabs.cl/sitemap.xml
