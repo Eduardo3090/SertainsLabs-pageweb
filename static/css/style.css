@@ -45,6 +45,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
     padding: .75rem 1.7rem !important;
     border-radius: 4px;
     font-weight: 600 !important;
+    white-space: nowrap;
     transition: background .2s !important;
 }
 .nav-cta:hover { background: var(--orange-light) !important; }
