@@ -149,8 +149,11 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 }
 
 .nav-brand img {
-    filter: drop-shadow(0 2px 5px rgba(17, 17, 17, .3));
+    filter: drop-shadow(0 4px 10px rgba(17, 17, 17, .45)) drop-shadow(0 1px 3px rgba(17, 17, 17, .3));
     transition: filter .2s ease;
+}
+.footer-brand img {
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .35));
 }
 /* ── HERO ─────────────────────────────────────────────── */
 .hero {
@@ -453,6 +456,11 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ── EQUIPO ───────────────────────────────────────────── */
+.team-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+}
 .team-card {
     background: var(--cream); border-radius: 12px;
     border-top: 4px solid var(--orange);
@@ -502,7 +510,7 @@ footer {
 .footer-bottom p { font-size: .78rem; color: rgba(var(--cream-rgb),.25); }
 
 /* ── RESPONSIVE ───────────────────────────────────────── */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .hamburger { display: flex; }
     .nav-links {
         display: none; position: absolute; top: 100%; left: 0; right: 0;
@@ -998,9 +1006,9 @@ footer {
 }
 
 /* ── RESPONSIVE EQUIPO ────────────────────────────────── */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     /* Equipo - Una columna en móvil */
-    .section-light .section-inner > div[style*="grid-template-columns"] {
+    .team-grid {
         grid-template-columns: 1fr !important;
         gap: 2rem !important;
     }
