@@ -11,21 +11,31 @@
     <meta property="og:description" content="{% block og_description %}Desarrollo web profesional para empresas que quieren crecer.{% endblock %}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{% block og_url %}https://sertainslabs-pageweb.onrender.com/{% endblock %}">
-    <meta property="og:image" content="https://sertainslabs-pageweb.onrender.com{{ url_for('static', filename='img/logo-sertains-labs.png') }}">
+    <meta property="og:image" content="{% block og_image %}https://sertainslabs-pageweb.onrender.com{{ url_for('static', filename='img/og-image.jpg') }}{% endblock %}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:locale" content="es_CL">
+    <meta property="og:site_name" content="SertainsLabs SpA">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}{{ self.og_title() }}{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}{{ self.og_description() }}{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{{ self.og_image() }}{% endblock %}">
 
     <meta name="robots" content="{% block robots %}index, follow{% endblock %}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/logo-sertains-labs.png') }}" type="image/png">
 </head>
 <body>
 <nav id="mainNav">
     <a href="/" class="nav-brand">
-        <img src="{{ url_for('static', filename='img/logo-sertains-labs.png') }}" alt="SertainsLabs" style="height:96px; width:auto;">
+        <img src="{{ url_for('static', filename='img/logo-sertains-labs.png') }}" alt="SertainsLabs" width="287" height="96" style="height:96px; width:auto;" fetchpriority="high">
     </a>
     <ul class="nav-links" id="navLinks">
         <li><a href="/">Inicio</a></li>
@@ -44,7 +54,7 @@
 <footer>
     <div class="footer-inner">
         <div class="footer-brand">
-            <img src="{{ url_for('static', filename='img/logo-sertains-labs.png') }}" alt="SertainsLabs" style="height:72px;">
+            <img src="{{ url_for('static', filename='img/logo-sertains-labs.png') }}" alt="SertainsLabs" width="215" height="72" style="height:72px;" loading="lazy">
             <p>Desarrollo web profesional para empresas que quieren crecer.</p>
             <!-- REDES SOCIALES EN FOOTER - AGREGAR AQUÍ -->
             <div class="footer-social">

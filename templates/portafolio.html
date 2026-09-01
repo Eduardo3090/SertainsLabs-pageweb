@@ -23,7 +23,7 @@
             {% for proyecto in proyectos %}
             <div class="portfolio-card reveal">
                 <div class="portfolio-card-image{% if proyecto.es_logo %} is-logo{% endif %}">
-                    <img src="{{ proyecto.imagen }}" alt="{{ proyecto.nombre }}">
+                    <img src="{{ proyecto.imagen }}" alt="{{ proyecto.nombre }}" loading="lazy" decoding="async">
                 </div>
                 <div class="portfolio-card-body">
                     <h2>{{ proyecto.nombre }}</h2>
