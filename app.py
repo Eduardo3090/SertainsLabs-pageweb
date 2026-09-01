@@ -131,7 +131,7 @@ def portafolio():
             'nombre': 'Megadiseños',
             'descripcion': 'Sitio corporativo para imprenta en Copiapó, con catálogo de productos, cotizador integrado y SEO local orientado a "imprenta en Copiapó".',
             'tags': ['Flask', 'SEO local', 'WhatsApp API'],
-            'imagen': url_for('static', filename='img/logo-megadisenos.png'),
+            'imagen': url_for('static', filename='img/logo-megadisenos.webp'),
             'es_logo': True,
             'url': 'https://megadise-os.onrender.com/'
         },
@@ -139,7 +139,7 @@ def portafolio():
             'nombre': 'M&J Consultores Estratégicos',
             'descripcion': 'Sitio institucional para consultora de prevención de riesgos, administración y logística, con captación de leads y roadmap de nuevas funciones.',
             'tags': ['Flask', 'Landing institucional', 'Captación de leads'],
-            'imagen': url_for('static', filename='img/logo-m&jconsultores.png'),
+            'imagen': url_for('static', filename='img/logo-m&jconsultores.webp'),
             'es_logo': True,
             'url': 'https://mjy-consultores.onrender.com/'
         }
