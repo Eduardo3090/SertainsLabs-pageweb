@@ -10,6 +10,15 @@ from email.mime.multipart import MIMEMultipart
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'tu-clave-secreta-cambia-esto-en-produccion'
+# Cache de 7 días para archivos estáticos (imágenes, CSS, JS) en el navegador/CDN
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 60 * 60 * 24 * 7
+
+
+@app.after_request
+def add_cache_headers(response):
+    if request.path.startswith('/static/'):
+        response.headers['Cache-Control'] = 'public, max-age=604800, immutable'
+    return response
 
 
 resend.api_key = os.environ.get('RESEND_API_KEY')
@@ -115,9 +124,6 @@ def gracias():
     return render_template('gracias.html')
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
-
 @app.route('/portafolio')
 def portafolio():
     proyectos = [
@@ -139,3 +145,7 @@ def portafolio():
         }
     ]
     return render_template('portafolio.html', proyectos=proyectos)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
