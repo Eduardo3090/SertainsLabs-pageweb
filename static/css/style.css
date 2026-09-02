@@ -257,20 +257,20 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
     margin-top: 3.5rem;
 }
 .service-card {
-    background: var(--cream);
-    border: 1px solid var(--border);
+    background: var(--ink);
+    border: 1px solid var(--ink);
     border-radius: 10px;
     padding: 2.4rem 2.2rem;
     transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
 }
 .service-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 16px 40px rgba(0,0,0,.08);
+    box-shadow: 0 16px 40px rgba(0,0,0,.25);
     border-color: var(--orange-light);
 }
 .service-card-icon {
     display: inline-flex; width: 52px; height: 52px;
-    background: rgba(242,100,25,.1); border-radius: 10px;
+    background: rgba(242,100,25,.15); border-radius: 10px;
     align-items: center; justify-content: center;
     font-size: 1.3rem; color: var(--orange);
     margin-bottom: 1.4rem;
@@ -278,18 +278,18 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 }
 .service-card:hover .service-card-icon {
     background: var(--orange);
-    color: var(--cream);
+    color: var(--ink);
     transform: scale(1.06) rotate(-4deg);
 }
 .service-card h2 {
     font-family: var(--serif);
     font-size: 1.3rem;
     margin-bottom: .7rem;
-    color: var(--ink);
+    color: var(--cream);
 }
 .service-card p {
     font-size: .92rem;
-    color: var(--mid);
+    color: rgba(var(--cream-rgb),.6);
     line-height: 1.65;
     margin-bottom: 1.4rem;
 }
@@ -301,7 +301,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--ink); ov
 }
 .service-features li {
     font-size: .85rem;
-    color: var(--muted);
+    color: rgba(var(--cream-rgb),.55);
     display: flex;
     align-items: center;
     gap: .55rem;
