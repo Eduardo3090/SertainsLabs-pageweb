@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 from datetime import datetime
 from sheets import guardar_contacto
 import smtplib
@@ -50,6 +50,31 @@ def enviar_correo_contacto(nombre, email_cliente, empresa, servicio, mensaje):
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
+# Estos archivos deben servirse desde la raíz del dominio (no /static/) para
+# que Google, los navegadores y los crawlers de IA los encuentren.
+@app.route('/favicon.ico')
+def favicon_ico():
+    return send_from_directory(
+        app.static_folder, 'img/favicon/favicon.ico',
+        mimetype='image/vnd.microsoft.icon'
+    )
+
+
+@app.route('/robots.txt')
+def robots_txt():
+    return send_from_directory(app.static_folder, 'robots.txt', mimetype='text/plain')
+
+
+@app.route('/sitemap.xml')
+def sitemap_xml():
+    return send_from_directory(app.static_folder, 'sitemap.xml', mimetype='application/xml')
+
+
+@app.route('/llms.txt')
+def llms_txt():
+    return send_from_directory(app.static_folder, 'llms.txt', mimetype='text/plain')
 
 
 @app.route('/servicios')
