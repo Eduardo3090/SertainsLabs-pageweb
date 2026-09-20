@@ -34,7 +34,39 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     </noscript>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=3">
-    <link rel="icon" href="{{ url_for('static', filename='img/logo-sertains-labs.webp') }}" type="image/webp">
+
+    <!-- Favicon: formatos ICO/PNG (Google Search no soporta WEBP como favicon) -->
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon/favicon.ico') }}" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/favicon/favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/favicon/apple-touch-icon.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
+    <meta name="theme-color" content="#F26419">
+
+    <!-- Datos estructurados (JSON-LD) para buscadores e IAs -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "SertainsLabs SpA",
+      "alternateName": "Sertains Labs",
+      "url": "https://www.sertainslabs.cl/",
+      "logo": "https://www.sertainslabs.cl{{ url_for('static', filename='img/favicon/android-chrome-512x512.png') }}",
+      "image": "https://www.sertainslabs.cl{{ url_for('static', filename='img/og-image.jpg') }}",
+      "description": "Agencia de desarrollo web en Ñuñoa, Santiago, Chile. Sitios web empresariales, e-commerce y automatizaciones a medida para pymes y emprendedores.",
+      "email": "sertainslabsinfo@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Ñuñoa",
+        "addressRegion": "Región Metropolitana",
+        "addressCountry": "CL"
+      },
+      "areaServed": "CL",
+      "sameAs": [
+        "https://www.instagram.com/sertainslabs/"
+      ]
+    }
+    </script>
 </head>
 <body>
 <nav id="mainNav">

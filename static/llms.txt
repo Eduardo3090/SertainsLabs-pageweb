@@ -1,0 +1,15 @@
+# SertainsLabs SpA
+
+> Agencia de desarrollo web en Ñuñoa, Santiago, Chile. Creamos sitios web empresariales, plataformas e-commerce y automatizaciones a medida sobre un stack Flask/Python, con atención directa y sin intermediarios para pymes y emprendedores en todo Chile.
+
+## Servicios
+
+- [Servicios](https://www.sertainslabs.cl/servicios): Desarrollo de sitios web, e-commerce con medios de pago chilenos, landing pages y mantención continua.
+- [Portafolio](https://www.sertainslabs.cl/portafolio): Proyectos realizados por SertainsLabs, incluyendo Megadiseños y M&J Consultores.
+- [Equipo](https://www.sertainslabs.cl/equipo): Quiénes conforman SertainsLabs SpA.
+- [Contacto](https://www.sertainslabs.cl/contacto): Cómo agendar una reunión o solicitar una cotización.
+
+## Notas
+
+- Empresa constituida como SpA en Chile (Ñuñoa, Santiago), con atención remota a todo el país.
+- Contacto: sertainslabsinfo@gmail.com — Instagram: @sertainslabs
