@@ -42,8 +42,24 @@ TZ = ZoneInfo(TZ_NAME)
 DB_PATH = os.environ.get("BOT_DB_PATH", "sertainsbot.db")
 MAX_HISTORIAL = 15
 
-with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "sertainsbot_prompt.txt"), encoding="utf-8") as f:
-    SYSTEM_PROMPT = f.read()
+LLM_TEMPERATURE = float(os.environ.get("LLM_TEMPERATURE", "0.4"))
+
+_BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+def _leer_archivo(nombre):
+    ruta = os.path.join(_BASE_DIR, nombre)
+    if not os.path.exists(ruta):
+        return ""
+    with open(ruta, encoding="utf-8") as f:
+        return f.read()
+
+
+# Instrucciones (cómo se comporta) + base de conocimiento (qué sabe)
+SYSTEM_PROMPT = _leer_archivo("sertainsbot_prompt.txt")
+_conocimiento = _leer_archivo("sertainsbot_conocimiento.md")
+if _conocimiento:
+    SYSTEM_PROMPT += "\n\n# BASE DE CONOCIMIENTO (tu única fuente de verdad sobre Sertains Labs)\n\n" + _conocimiento
 
 db_lock = threading.Lock()
 
@@ -179,7 +195,7 @@ def ejecutar_herramienta(nombre, args, conv_id):
 
 # ---------- IA (Gemini u OpenRouter, mismo formato) ----------
 def llamar_llm(mensajes):
-    cuerpo = {"model": LLM_MODEL, "messages": mensajes}
+    cuerpo = {"model": LLM_MODEL, "messages": mensajes, "temperature": LLM_TEMPERATURE}
     if CAL_KEY and CAL_EVENT_ID:
         cuerpo["tools"] = HERRAMIENTAS
     r = requests.post(f"{LLM_BASE_URL}/chat/completions", headers={
