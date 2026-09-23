@@ -4,14 +4,17 @@ from sheets import guardar_contacto
 import smtplib
 import os
 import resend
-import os
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from sertainsbot import bot_bp
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'tu-clave-secreta-cambia-esto-en-produccion'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'tu-clave-secreta-cambia-esto-en-produccion')
 # Cache de 7 días para archivos estáticos (imágenes, CSS, JS) en el navegador/CDN
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 60 * 60 * 24 * 7
+
+# SertainsBot: agente de WhatsApp (rutas /whatsapp/webhook)
+app.register_blueprint(bot_bp)
 
 
 @app.after_request
