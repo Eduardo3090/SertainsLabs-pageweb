@@ -12,11 +12,13 @@ import hmac
 import hashlib
 import sqlite3
 import threading
+import re
+import time
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
 import requests
-from flask import Blueprint, request, abort
+from flask import Blueprint, request, abort, jsonify
 
 bot_bp = Blueprint("sertainsbot", __name__)
 
@@ -122,7 +124,7 @@ def ver_disponibilidad(fecha):
     return {"fecha": fecha, "horarios_disponibles": [s.get("start") for s in data.get(fecha, [])][:12]}
 
 
-def reservar_reunion(inicio, nombre, email, negocio, necesidad, wa_id):
+def reservar_reunion(inicio, nombre, email, negocio, necesidad, telefono=None):
     try:
         inicio_utc = datetime.fromisoformat(inicio.replace("Z", "+00:00")).astimezone(timezone.utc)
     except ValueError:
@@ -133,8 +135,8 @@ def reservar_reunion(inicio, nombre, email, negocio, necesidad, wa_id):
     }, json={
         "start": inicio_utc.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "eventTypeId": int(CAL_EVENT_ID),
-        "attendee": {"name": nombre, "email": email, "timeZone": TZ_NAME,
-                     "phoneNumber": "+" + wa_id, "language": "es"},
+        "attendee": dict({"name": nombre, "email": email, "timeZone": TZ_NAME, "language": "es"},
+                         **({"phoneNumber": "+" + telefono} if telefono else {})),
         "metadata": {"negocio": str(negocio)[:400], "necesidad": str(necesidad)[:400], "origen": "whatsapp"},
     }, timeout=20)
     if r.status_code >= 300:
@@ -162,13 +164,14 @@ HERRAMIENTAS = [
 ]
 
 
-def ejecutar_herramienta(nombre, args, wa_id):
+def ejecutar_herramienta(nombre, args, conv_id):
+    telefono = None if conv_id.startswith("web:") else conv_id
     try:
         if nombre == "ver_disponibilidad":
             return ver_disponibilidad(args.get("fecha", ""))
         if nombre == "reservar_reunion":
             return reservar_reunion(args.get("inicio", ""), args.get("nombre", ""), args.get("email", ""),
-                                    args.get("negocio", ""), args.get("necesidad", ""), wa_id)
+                                    args.get("negocio", ""), args.get("necesidad", ""), telefono)
         return {"error": f"Herramienta desconocida: {nombre}"}
     except Exception as e:
         return {"error": str(e)}
@@ -188,9 +191,18 @@ def llamar_llm(mensajes):
     return r.json()["choices"][0]["message"]
 
 
-def generar_respuesta(wa_id, texto):
+INSTRUCCIONES_WEB = (
+    "\n\nCANAL: estás en el chat del sitio web www.sertainslabs.cl. El sitio ya te presentó al visitante, "
+    "así que no te vuelvas a presentar. Si prefiere hablar con una persona, invítalo a escribir por WhatsApp "
+    "al +56 9 7881 0950 o a usar el formulario de /contacto."
+)
+
+
+def generar_respuesta(wa_id, texto, canal="whatsapp"):
     ahora = datetime.now(TZ).strftime("%A %Y-%m-%d %H:%M")
     sistema = SYSTEM_PROMPT + f"\n\nFecha y hora actual en Chile: {ahora}"
+    if canal == "web":
+        sistema += INSTRUCCIONES_WEB
     if not (CAL_KEY and CAL_EVENT_ID):
         sistema += "\nLa agenda automática no está activa: si quieren reunión, pide nombre, email y horario preferido y di que el equipo confirmará."
     mensajes = [{"role": "system", "content": sistema}] + historial(wa_id) + [{"role": "user", "content": texto}]
@@ -253,3 +265,49 @@ def recibir_webhook():
                     threading.Thread(target=enviar_whatsapp, args=(
                         wa_id, "Por ahora solo puedo leer mensajes de texto ✍️"), daemon=True).start()
     return "ok", 200
+
+
+# ---------- Chat del sitio web ----------
+LIMITE_WEB_POR_HORA = 40
+_web_hits = {}
+_web_lock = threading.Lock()
+
+
+def web_permitido(ip):
+    """Límite simple por IP para que nadie agote la cuota de la IA."""
+    ahora = time.time()
+    with _web_lock:
+        hits = [t for t in _web_hits.get(ip, []) if ahora - t < 3600]
+        permitido = len(hits) < LIMITE_WEB_POR_HORA
+        if permitido:
+            hits.append(ahora)
+        _web_hits[ip] = hits
+    return permitido
+
+
+@bot_bp.post("/api/chat")
+def chat_web():
+    data = request.get_json(silent=True) or {}
+    sesion = re.sub(r"[^a-zA-Z0-9-]", "", str(data.get("session_id", "")))[:64]
+    texto = str(data.get("message", "")).strip()[:1000]
+    if not sesion or not texto:
+        return jsonify(reply="Escribe un mensaje para continuar."), 400
+
+    ip = (request.headers.get("X-Forwarded-For") or request.remote_addr or "").split(",")[0].strip()
+    if not web_permitido(ip):
+        return jsonify(reply="Alcanzaste el límite de mensajes por ahora. Escríbenos por WhatsApp al +56 9 7881 0950 y te respondemos."), 429
+
+    conv_id = "web:" + sesion
+    if texto.lower() == "reiniciar":
+        borrar_historial(conv_id)
+        return jsonify(reply="Listo, empezamos de nuevo. ¿En qué te ayudo?")
+
+    try:
+        respuesta = generar_respuesta(conv_id, texto, canal="web")
+    except Exception as e:
+        print("[SertainsBot web] Error:", repr(e))
+        return jsonify(reply="No pude responder en este momento. Intenta de nuevo en unos segundos o escríbenos por WhatsApp al +56 9 7881 0950."), 500
+
+    guardar(conv_id, "user", texto)
+    guardar(conv_id, "assistant", respuesta)
+    return jsonify(reply=respuesta)
