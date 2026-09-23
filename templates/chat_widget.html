@@ -1,0 +1,222 @@
+<!-- SertainsBot: asistente IA de Sertains Labs — se incluye en base.html -->
+<style>
+  .slc-launcher {
+    position: fixed; right: 20px; bottom: 20px; z-index: 9000;
+    display: flex; align-items: center; gap: .6rem;
+    padding: .8rem 1.15rem .8rem .9rem; border: 0; border-radius: 999px;
+    background: var(--orange, #F26419); color: #fff;
+    font: 600 .95rem/1 var(--sans, 'Inter', system-ui, sans-serif);
+    box-shadow: 0 10px 28px rgba(242, 100, 25, .35); cursor: pointer;
+  }
+  .slc-launcher i { font-size: 1.25rem; }
+  .slc-launcher:focus-visible, .slc-panel button:focus-visible, .slc-panel a:focus-visible, .slc-input:focus-visible {
+    outline: 3px solid var(--orange-light, #FF9A5C); outline-offset: 2px;
+  }
+  .slc-launcher[aria-expanded="true"] { display: none; }
+
+  .slc-panel {
+    position: fixed; right: 20px; bottom: 20px; z-index: 9001;
+    width: min(390px, calc(100vw - 24px)); height: min(600px, calc(100vh - 40px));
+    display: none; flex-direction: column; overflow: hidden;
+    background: var(--cream, #EDE2CC); border-radius: 22px;
+    box-shadow: 0 24px 60px rgba(20, 16, 12, .35);
+    font-family: var(--sans, 'Inter', system-ui, sans-serif);
+  }
+  .slc-panel.is-open { display: flex; animation: slc-in .22s ease-out; }
+  @keyframes slc-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .slc-panel.is-open { animation: none; } }
+
+  .slc-head {
+    display: flex; align-items: center; gap: .75rem;
+    padding: 1rem 1.1rem; background: var(--ink, #1C1814); color: var(--cream, #EDE2CC);
+  }
+  .slc-avatar {
+    width: 38px; height: 38px; flex: none; border-radius: 12px;
+    display: grid; place-items: center; background: var(--orange, #F26419);
+    font: 700 1.2rem/1 var(--serif, 'Lora', Georgia, serif); color: #fff;
+  }
+  .slc-title { font: 600 1.05rem/1.2 var(--serif, 'Lora', Georgia, serif); margin: 0; }
+  .slc-status { font-size: .78rem; opacity: .7; margin: .15rem 0 0; }
+  .slc-head-actions { margin-left: auto; display: flex; gap: .35rem; }
+  .slc-icon-btn {
+    width: 36px; height: 36px; border-radius: 10px; border: 0; cursor: pointer;
+    display: grid; place-items: center; background: rgba(237, 226, 204, .1);
+    color: var(--cream, #EDE2CC); font-size: 1rem; text-decoration: none;
+  }
+  .slc-icon-btn:hover { background: rgba(237, 226, 204, .2); }
+
+  .slc-log { flex: 1; overflow-y: auto; padding: 1.1rem 1rem .5rem; display: flex; flex-direction: column; gap: .6rem; }
+  .slc-msg { max-width: 85%; padding: .7rem .9rem; font-size: .93rem; line-height: 1.5; white-space: normal; overflow-wrap: anywhere; }
+  .slc-msg.bot { align-self: flex-start; background: #fff; color: var(--ink, #1C1814); border-radius: 4px 16px 16px 16px; }
+  .slc-msg.user { align-self: flex-end; background: var(--orange, #F26419); color: #fff; border-radius: 16px 4px 16px 16px; }
+  .slc-msg strong { font-weight: 650; }
+
+  .slc-typing { align-self: flex-start; display: flex; gap: 4px; padding: .8rem .9rem; background: #fff; border-radius: 4px 16px 16px 16px; }
+  .slc-typing span { width: 7px; height: 7px; border-radius: 50%; background: var(--orange, #F26419); opacity: .35; animation: slc-dot 1s infinite; }
+  .slc-typing span:nth-child(2) { animation-delay: .15s; }
+  .slc-typing span:nth-child(3) { animation-delay: .3s; }
+  @keyframes slc-dot { 50% { opacity: 1; } }
+
+  .slc-chips { display: flex; flex-wrap: wrap; gap: .45rem; padding: 0 1rem .6rem; }
+  .slc-chip {
+    border: 1.5px solid var(--orange, #F26419); background: transparent; color: var(--ink, #1C1814);
+    padding: .45rem .8rem; border-radius: 999px; font: 500 .84rem/1.2 inherit; cursor: pointer;
+  }
+  .slc-chip:hover { background: rgba(242, 100, 25, .1); }
+
+  .slc-form { margin: 0; display: flex; gap: .5rem; padding: .75rem; background: #fff; border-top: 1px solid rgba(28, 24, 20, .08); }
+  .slc-input {
+    flex: 1; border: 0; background: var(--cream, #EDE2CC); border-radius: 12px;
+    padding: .75rem .9rem; font: inherit; font-size: .93rem; color: var(--ink, #1C1814); resize: none; max-height: 110px;
+  }
+  .slc-send {
+    width: 44px; flex: none; border: 0; border-radius: 12px; cursor: pointer;
+    background: var(--orange, #F26419); color: #fff; font-size: 1rem;
+  }
+  .slc-send:disabled { opacity: .5; cursor: default; }
+  .slc-note { margin: 0; padding: 0 1rem .7rem; background: #fff; font-size: .72rem; color: #7a7065; }
+  .slc-note a { color: inherit; }
+
+  @media (max-width: 520px) {
+    .slc-panel { right: 0; bottom: 0; width: 100vw; height: 100dvh; border-radius: 0; }
+    .slc-launcher span { display: none; }
+    .slc-launcher { padding: .95rem; }
+  }
+</style>
+
+<button class="slc-launcher" id="slc-launcher" aria-controls="slc-panel" aria-expanded="false" aria-label="Abrir chat con SertainsBot">
+  <i class="fas fa-comment-dots" aria-hidden="true"></i>
+  <span>Pregúntale a SertainsBot</span>
+</button>
+
+<section class="slc-panel" id="slc-panel" role="dialog" aria-label="SertainsBot, asistente de Sertains Labs">
+  <header class="slc-head">
+    <div class="slc-avatar" aria-hidden="true">S</div>
+    <div>
+      <p class="slc-title">SertainsBot</p>
+      <p class="slc-status">Asistente con IA de Sertains Labs</p>
+    </div>
+    <div class="slc-head-actions">
+      <a class="slc-icon-btn" href="https://wa.me/56978810950?text=Hola%20Sertains%20Labs%2C%20vengo%20desde%20el%20sitio%20web" target="_blank" rel="noopener" aria-label="Hablar con una persona por WhatsApp" title="Hablar por WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+      </a>
+      <button class="slc-icon-btn" id="slc-close" aria-label="Cerrar chat"><i class="fas fa-xmark" aria-hidden="true"></i></button>
+    </div>
+  </header>
+
+  <div class="slc-log" id="slc-log" aria-live="polite"></div>
+
+  <div class="slc-chips" id="slc-chips">
+    <button class="slc-chip">¿Qué servicios ofrecen?</button>
+    <button class="slc-chip">¿Cuánto cuesta un sitio web?</button>
+    <button class="slc-chip">Quiero una tienda online</button>
+    <button class="slc-chip">Agendar una reunión</button>
+  </div>
+
+  <form class="slc-form" id="slc-form">
+    <label for="slc-input" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Escribe tu mensaje</label>
+    <textarea class="slc-input" id="slc-input" rows="1" maxlength="1000" placeholder="Escribe tu pregunta…"></textarea>
+    <button class="slc-send" id="slc-send" type="submit" aria-label="Enviar mensaje"><i class="fas fa-paper-plane" aria-hidden="true"></i></button>
+  </form>
+  <p class="slc-note">Asistente automático. Puede equivocarse; para temas importantes, habla con el equipo. <a href="/privacidad">Privacidad</a></p>
+</section>
+
+<script>
+(function () {
+  var BIENVENIDA = "¡Hola! Soy SertainsBot, el asistente de Sertains Labs. Te puedo contar sobre nuestros sitios web, tiendas online y automatizaciones, o ayudarte a agendar una reunión sin costo. ¿Qué necesitas?";
+  var launcher = document.getElementById("slc-launcher");
+  var panel = document.getElementById("slc-panel");
+  var log = document.getElementById("slc-log");
+  var chips = document.getElementById("slc-chips");
+  var form = document.getElementById("slc-form");
+  var input = document.getElementById("slc-input");
+  var send = document.getElementById("slc-send");
+  var ocupado = false;
+
+  function leer(store, key) { try { return window[store].getItem(key); } catch (e) { return null; } }
+  function escribir(store, key, val) { try { window[store].setItem(key, val); } catch (e) {} }
+
+  var sesion = leer("localStorage", "slc_session");
+  if (!sesion) {
+    sesion = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) + "-" + Math.random().toString(16).slice(2);
+    escribir("localStorage", "slc_session", sesion);
+  }
+
+  var historial = [];
+  try { historial = JSON.parse(leer("sessionStorage", "slc_log") || "[]"); } catch (e) { historial = []; }
+
+  function formatear(texto) {
+    var seguro = texto.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    return seguro.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/\n/g, "<br>");
+  }
+
+  function pintar(rol, texto, guardarlo) {
+    var div = document.createElement("div");
+    div.className = "slc-msg " + rol;
+    div.innerHTML = formatear(texto);
+    log.appendChild(div);
+    log.scrollTop = log.scrollHeight;
+    if (guardarlo) {
+      historial.push({ r: rol, t: texto });
+      escribir("sessionStorage", "slc_log", JSON.stringify(historial.slice(-40)));
+    }
+  }
+
+  function iniciar() {
+    log.innerHTML = "";
+    pintar("bot", BIENVENIDA, false);
+    historial.forEach(function (m) { pintar(m.r, m.t, false); });
+    chips.style.display = historial.length ? "none" : "flex";
+  }
+
+  function abrir() {
+    panel.classList.add("is-open");
+    launcher.setAttribute("aria-expanded", "true");
+    if (!log.children.length) iniciar();
+    setTimeout(function () { input.focus(); }, 50);
+  }
+  function cerrar() {
+    panel.classList.remove("is-open");
+    launcher.setAttribute("aria-expanded", "false");
+    launcher.focus();
+  }
+
+  function enviar(texto) {
+    texto = (texto || "").trim();
+    if (!texto || ocupado) return;
+    ocupado = true; send.disabled = true;
+    chips.style.display = "none";
+    pintar("user", texto, true);
+    input.value = ""; input.style.height = "";
+
+    var typing = document.createElement("div");
+    typing.className = "slc-typing";
+    typing.innerHTML = "<span></span><span></span><span></span>";
+    log.appendChild(typing); log.scrollTop = log.scrollHeight;
+
+    fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ session_id: sesion, message: texto })
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (d) { pintar("bot", d.reply || "No pude responder. Intenta de nuevo.", true); })
+      .catch(function () { pintar("bot", "No hay conexión. Revisa tu internet e intenta de nuevo.", false); })
+      .finally(function () {
+        typing.remove(); ocupado = false; send.disabled = false; input.focus();
+      });
+  }
+
+  launcher.addEventListener("click", abrir);
+  document.getElementById("slc-close").addEventListener("click", cerrar);
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && panel.classList.contains("is-open")) cerrar(); });
+  chips.addEventListener("click", function (e) { if (e.target.classList.contains("slc-chip")) enviar(e.target.textContent); });
+  form.addEventListener("submit", function (e) { e.preventDefault(); enviar(input.value); });
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); enviar(input.value); }
+  });
+  input.addEventListener("input", function () {
+    input.style.height = "auto"; input.style.height = Math.min(input.scrollHeight, 110) + "px";
+  });
+})();
+</script>
