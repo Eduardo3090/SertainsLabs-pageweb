@@ -151,7 +151,10 @@ def agendar():
 def gracias():
     return render_template('gracias.html')
 
-
+@app.route('/privacidad')
+def privacidad():
+    return render_template('privacidad.html')
+    
 @app.route('/portafolio')
 def portafolio():
     proyectos = [
