@@ -194,17 +194,43 @@ def ejecutar_herramienta(nombre, args, conv_id):
 
 
 # ---------- IA (Gemini u OpenRouter, mismo formato) ----------
+# Modelos de respaldo si el principal falla (separados por coma), ej: "gemini-3.6-flash-lite"
+LLM_FALLBACK_MODELS = [m.strip() for m in os.environ.get("LLM_FALLBACK_MODELS", "").split(",") if m.strip()]
+ERRORES_REINTENTABLES = {429, 500, 502, 503, 504}
+
+
 def llamar_llm(mensajes):
-    cuerpo = {"model": LLM_MODEL, "messages": mensajes, "temperature": LLM_TEMPERATURE}
-    if CAL_KEY and CAL_EVENT_ID:
-        cuerpo["tools"] = HERRAMIENTAS
-    r = requests.post(f"{LLM_BASE_URL}/chat/completions", headers={
-        "Authorization": f"Bearer {LLM_API_KEY}",
-        "Content-Type": "application/json",
-    }, json=cuerpo, timeout=90)
-    if r.status_code >= 300:
-        raise RuntimeError(f"IA respondió {r.status_code}: {r.text[:300]}")
-    return r.json()["choices"][0]["message"]
+    """Llama a la IA con reintentos y modelos de respaldo para no quedar sin respuesta."""
+    ultimo_error = None
+    for modelo in [LLM_MODEL] + LLM_FALLBACK_MODELS:
+        for intento in range(3):
+            cuerpo = {"model": modelo, "messages": mensajes, "temperature": LLM_TEMPERATURE}
+            if CAL_KEY and CAL_EVENT_ID:
+                cuerpo["tools"] = HERRAMIENTAS
+            try:
+                r = requests.post(f"{LLM_BASE_URL}/chat/completions", headers={
+                    "Authorization": f"Bearer {LLM_API_KEY}",
+                    "Content-Type": "application/json",
+                }, json=cuerpo, timeout=45)
+            except requests.RequestException as e:
+                ultimo_error = f"{modelo}: sin conexión ({e})"
+                print("[SertainsBot] Reintentando IA:", ultimo_error)
+                time.sleep(1.5 * (intento + 1))
+                continue
+
+            if r.status_code < 300:
+                try:
+                    return r.json()["choices"][0]["message"]
+                except (KeyError, IndexError, ValueError):
+                    ultimo_error = f"{modelo}: respuesta inesperada {r.text[:200]}"
+                    break
+
+            ultimo_error = f"{modelo}: {r.status_code} {r.text[:300]}"
+            print("[SertainsBot] Error IA:", ultimo_error)
+            if r.status_code not in ERRORES_REINTENTABLES:
+                break  # error de configuración: probar el siguiente modelo
+            time.sleep(2 * (intento + 1))  # 2s, 4s, 6s
+    raise RuntimeError(f"IA no disponible. Último error: {ultimo_error}")
 
 
 INSTRUCCIONES_WEB = (
