@@ -34,6 +34,10 @@ LLM_BASE_URL = os.environ.get("LLM_BASE_URL", "https://generativelanguage.google
 LLM_API_KEY = os.environ.get("LLM_API_KEY", "")
 LLM_MODEL = os.environ.get("LLM_MODEL", "gemini-3.6-flash")
 
+RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
+BOT_EMAIL_TO = os.environ.get("BOT_EMAIL_TO", "sertainslabs@gmail.com")
+BOT_EMAIL_FROM = os.environ.get("BOT_EMAIL_FROM", "SertainsBot <onboarding@resend.dev>")
+
 CAL_KEY = os.environ.get("CALCOM_API_KEY", "")
 CAL_EVENT_ID = os.environ.get("CALCOM_EVENT_TYPE_ID", "")
 
@@ -62,6 +66,7 @@ if _conocimiento:
     SYSTEM_PROMPT += "\n\n# BASE DE CONOCIMIENTO (tu única fuente de verdad sobre Sertains Labs)\n\n" + _conocimiento
 
 db_lock = threading.Lock()
+_ctx = threading.local()  # guarda el mensaje en curso para incluirlo en el resumen
 
 
 # ---------- Memoria ----------
@@ -160,6 +165,104 @@ def reservar_reunion(inicio, nombre, email, negocio, necesidad, telefono=None):
     return {"ok": True}
 
 
+# ---------- Resumen de prospectos (correo + Google Sheets) ----------
+def _esc(texto):
+    return (str(texto or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+            .replace("\n", "<br>"))
+
+
+def registrar_prospecto(datos, conv_id):
+    """Envía al equipo el resumen de la conversación y los datos que dio el cliente."""
+    canal = "Chat del sitio web" if conv_id.startswith("web:") else f"WhatsApp +{conv_id}"
+    fecha = datetime.now(TZ).strftime("%d-%m-%Y %H:%M")
+    nombre = datos.get("nombre") or "Sin nombre"
+
+    filas = [
+        ("Nombre", datos.get("nombre")),
+        ("Email", datos.get("email")),
+        ("Teléfono", datos.get("telefono") or (None if conv_id.startswith("web:") else "+" + conv_id)),
+        ("Negocio", datos.get("negocio")),
+        ("Necesidad", datos.get("necesidad")),
+        ("Servicio de interés", datos.get("servicio_interes")),
+        ("Horario preferido", datos.get("horario_preferido")),
+        ("Nivel de interés", datos.get("nivel_interes")),
+        ("Canal", canal),
+        ("Fecha", fecha),
+    ]
+    tabla = "".join(
+        f"<tr><td style='padding:6px 12px;color:#7a7065'>{k}</td><td style='padding:6px 12px'><b>{_esc(v)}</b></td></tr>"
+        for k, v in filas if v
+    )
+    transcripcion = "".join(
+        f"<p style='margin:4px 0'><b>{'Cliente' if m['role'] == 'user' else 'SertainsBot'}:</b> {_esc(m['content'])}</p>"
+        for m in historial(conv_id) + [{"role": "user", "content": getattr(_ctx, "mensaje_actual", "")}]
+        if m["content"]
+    )
+    html = f"""
+    <div style="font-family:Arial,sans-serif;max-width:640px">
+      <h2 style="color:#F26419;margin-bottom:4px">Nuevo prospecto: {_esc(nombre)}</h2>
+      <p style="color:#7a7065;margin-top:0">Resumen generado por SertainsBot</p>
+      <h3>Resumen de la conversación</h3>
+      <p>{_esc(datos.get("resumen"))}</p>
+      <h3>Datos del cliente</h3>
+      <table style="border-collapse:collapse;background:#f7f2e8">{tabla}</table>
+      <h3>Próximo paso sugerido</h3>
+      <p>{_esc(datos.get("proximo_paso") or "Contactar al cliente para confirmar la reunión.")}</p>
+      <h3>Conversación completa</h3>
+      <div style="background:#f7f2e8;padding:10px 14px;font-size:14px">{transcripcion}</div>
+    </div>"""
+
+    enviado = False
+    if RESEND_API_KEY:
+        cuerpo = {
+            "from": BOT_EMAIL_FROM,
+            "to": [BOT_EMAIL_TO],
+            "subject": f"Nuevo prospecto SertainsBot: {nombre} ({canal})",
+            "html": html,
+        }
+        if datos.get("email"):
+            cuerpo["reply_to"] = datos["email"]
+        try:
+            r = requests.post("https://api.resend.com/emails", headers={
+                "Authorization": f"Bearer {RESEND_API_KEY}"}, json=cuerpo, timeout=20)
+            enviado = r.status_code < 300
+            if not enviado:
+                print("[SertainsBot] Error enviando resumen:", r.status_code, r.text[:300])
+        except requests.RequestException as e:
+            print("[SertainsBot] Error enviando resumen:", repr(e))
+
+    # También queda en la misma planilla del formulario de contacto
+    try:
+        from sheets import guardar_contacto
+        guardar_contacto(nombre, datos.get("email") or datos.get("telefono") or canal,
+                         f"[SertainsBot · {canal}] {datos.get('resumen', '')}", fecha)
+    except Exception as e:
+        print("[SertainsBot] No se pudo guardar en Sheets:", repr(e))
+
+    print(f"[SertainsBot] Prospecto registrado: {nombre} · {canal} · correo={'ok' if enviado else 'no'}")
+    return {"ok": True, "mensaje": "Datos registrados. El equipo fue notificado."}
+
+
+HERRAMIENTA_PROSPECTO = {"type": "function", "function": {
+    "name": "registrar_prospecto",
+    "description": ("Envía al equipo de Sertains Labs un resumen de la conversación con los datos del cliente. "
+                    "Úsala UNA vez, apenas el cliente haya dado su nombre y un medio de contacto (email o teléfono) "
+                    "y muestre interés (reunión, cotización o que lo contacten). Vuelve a usarla solo si el cliente "
+                    "corrige o agrega datos importantes."),
+    "parameters": {"type": "object", "properties": {
+        "nombre": {"type": "string"},
+        "email": {"type": "string"},
+        "telefono": {"type": "string"},
+        "negocio": {"type": "string", "description": "Nombre y rubro del negocio"},
+        "necesidad": {"type": "string", "description": "Qué problema quiere resolver o qué quiere lograr"},
+        "servicio_interes": {"type": "string", "description": "Servicio recomendado o pedido"},
+        "horario_preferido": {"type": "string", "description": "Día y hora que propuso para la reunión"},
+        "nivel_interes": {"type": "string", "enum": ["alto", "medio", "bajo"]},
+        "resumen": {"type": "string", "description": "Resumen de 3 a 5 frases de lo conversado: situación actual del cliente, lo que busca, dudas u objeciones y lo acordado"},
+        "proximo_paso": {"type": "string", "description": "Acción concreta sugerida para el equipo"}},
+        "required": ["nombre", "resumen"]}}}
+
+
 HERRAMIENTAS = [
     {"type": "function", "function": {
         "name": "ver_disponibilidad",
@@ -185,6 +288,8 @@ def ejecutar_herramienta(nombre, args, conv_id):
     try:
         if nombre == "ver_disponibilidad":
             return ver_disponibilidad(args.get("fecha", ""))
+        if nombre == "registrar_prospecto":
+            return registrar_prospecto(args, conv_id)
         if nombre == "reservar_reunion":
             return reservar_reunion(args.get("inicio", ""), args.get("nombre", ""), args.get("email", ""),
                                     args.get("negocio", ""), args.get("necesidad", ""), telefono)
@@ -205,8 +310,7 @@ def llamar_llm(mensajes):
     for modelo in [LLM_MODEL] + LLM_FALLBACK_MODELS:
         for intento in range(3):
             cuerpo = {"model": modelo, "messages": mensajes, "temperature": LLM_TEMPERATURE}
-            if CAL_KEY and CAL_EVENT_ID:
-                cuerpo["tools"] = HERRAMIENTAS
+            cuerpo["tools"] = [HERRAMIENTA_PROSPECTO] + (HERRAMIENTAS if CAL_KEY and CAL_EVENT_ID else [])
             try:
                 r = requests.post(f"{LLM_BASE_URL}/chat/completions", headers={
                     "Authorization": f"Bearer {LLM_API_KEY}",
@@ -246,7 +350,9 @@ def generar_respuesta(wa_id, texto, canal="whatsapp"):
     if canal == "web":
         sistema += INSTRUCCIONES_WEB
     if not (CAL_KEY and CAL_EVENT_ID):
-        sistema += "\nLa agenda automática no está activa: si quieren reunión, pide nombre, email y horario preferido y di que el equipo confirmará."
+        sistema += ("\nLa agenda automática no está activa: si quieren reunión, pide nombre, email y horario preferido, "
+                    "usa registrar_prospecto y di que el equipo confirmará por correo.")
+    _ctx.mensaje_actual = texto
     mensajes = [{"role": "system", "content": sistema}] + historial(wa_id) + [{"role": "user", "content": texto}]
 
     for _ in range(5):
