@@ -32,7 +32,7 @@ GRAPH_VERSION = os.environ.get("GRAPH_VERSION", "v23.0")
 # IA: por defecto Gemini (gratis). Para OpenRouter: LLM_BASE_URL=https://openrouter.ai/api/v1
 LLM_BASE_URL = os.environ.get("LLM_BASE_URL", "https://generativelanguage.googleapis.com/v1beta/openai").rstrip("/")
 LLM_API_KEY = os.environ.get("LLM_API_KEY", "")
-LLM_MODEL = os.environ.get("LLM_MODEL", "gemini-2.5-flash")
+LLM_MODEL = os.environ.get("LLM_MODEL", "gemini-3.6-flash")
 
 CAL_KEY = os.environ.get("CALCOM_API_KEY", "")
 CAL_EVENT_ID = os.environ.get("CALCOM_EVENT_TYPE_ID", "")
@@ -194,8 +194,8 @@ def ejecutar_herramienta(nombre, args, conv_id):
 
 
 # ---------- IA (Gemini u OpenRouter, mismo formato) ----------
-# Modelos de respaldo si el principal falla (separados por coma), ej: "gemini-3.6-flash-lite"
-LLM_FALLBACK_MODELS = [m.strip() for m in os.environ.get("LLM_FALLBACK_MODELS", "").split(",") if m.strip()]
+# Modelos de respaldo si el principal falla o se queda sin cuota (separados por coma)
+LLM_FALLBACK_MODELS = [m.strip() for m in os.environ.get("LLM_FALLBACK_MODELS", "gemini-2.5-flash-lite,gemini-3-flash").split(",") if m.strip()]
 ERRORES_REINTENTABLES = {429, 500, 502, 503, 504}
 
 
@@ -227,9 +227,9 @@ def llamar_llm(mensajes):
 
             ultimo_error = f"{modelo}: {r.status_code} {r.text[:300]}"
             print("[SertainsBot] Error IA:", ultimo_error)
-            if r.status_code not in ERRORES_REINTENTABLES:
-                break  # error de configuración: probar el siguiente modelo
-            time.sleep(2 * (intento + 1))  # 2s, 4s, 6s
+            if r.status_code == 429 or r.status_code not in ERRORES_REINTENTABLES:
+                break  # sin cuota o mal configurado: pasar de inmediato al siguiente modelo
+            time.sleep(2 * (intento + 1))  # saturación (5xx): esperar 2s y 4s y reintentar
     raise RuntimeError(f"IA no disponible. Último error: {ultimo_error}")
 
 
